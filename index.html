@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>C.R.E.S.T. — Colorado Referee Education & Supplemental Training</title>
+<meta name="description" content="CREST — Colorado Referee Education & Supplemental Training. Professional tools for Colorado Soccer Association referees, coaches, parents and coordinators.">
+<meta name="theme-color" content="#1B2F55">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --nv:#1B2F55; --nv2:#141C2E; --nv3:#0D1525;
+  --gold:#C8921A; --glt:#F5C842;
+  --white:#FFFFFF; --off:#F9F6EF;
+  --g4:#adb5bd; --g6:#6c757d;
+  --bebas:'Bebas Neue',sans-serif;
+  --font:'DM Sans',-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font);background:var(--nv3);color:var(--white);overflow-x:hidden;}
+
+/* ── HERO ── */
+.hero {
+  min-height:100vh;
+  background:var(--nv);
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:80px 24px 60px;
+}
+
+/* Diagonal texture */
+.hero::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(
+    -45deg,
+    transparent,transparent 40px,
+    rgba(255,255,255,.018) 40px,rgba(255,255,255,.018) 41px
+  );
+  pointer-events:none;
+}
+
+/* Gold accent lines */
+.hero::after {
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:4px;
+  background:linear-gradient(90deg, transparent, var(--gold) 20%, var(--glt) 50%, var(--gold) 80%, transparent);
+}
+
+/* Radial glow */
+.hero-glow {
+  position:absolute;
+  width:600px;height:600px;
+  background:radial-gradient(circle, rgba(200,146,26,.12) 0%, transparent 70%);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+
+.hero-content {
+  position:relative;
+  z-index:1;
+  text-align:center;
+  max-width:800px;
+}
+
+.hero-eyebrow {
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:20px;
+  opacity:0;
+  animation:fadeUp .8s .2s ease forwards;
+}
+
+.hero-logo {
+  margin-bottom:24px;
+  opacity:0;
+  animation:fadeUp .8s .4s ease forwards;
+}
+
+.hero-logo .crest-badge {
+  display:inline-block;
+  background:linear-gradient(135deg, var(--gold), var(--glt));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  font-family:var(--bebas);
+  font-size:clamp(72px, 15vw, 120px);
+  letter-spacing:.06em;
+  line-height:.9;
+}
+
+.hero-logo .crest-dot {
+  display:inline-block;
+  width:10px;height:10px;
+  background:var(--gold);
+  border-radius:50%;
+  margin:0 3px;
+  vertical-align:middle;
+  position:relative;
+  top:-8px;
+}
+
+.hero-full-name {
+  font-family:var(--bebas);
+  font-size:clamp(18px, 4vw, 28px);
+  letter-spacing:.12em;
+  color:rgba(255,255,255,.7);
+  margin-bottom:8px;
+  opacity:0;
+  animation:fadeUp .8s .55s ease forwards;
+}
+
+.hero-tagline {
+  font-size:clamp(13px, 2.5vw, 16px);
+  color:rgba(255,255,255,.5);
+  font-weight:400;
+  margin-bottom:48px;
+  opacity:0;
+  animation:fadeUp .8s .7s ease forwards;
+}
+
+.hero-tagline span {
+  color:var(--gold);
+  font-weight:700;
+}
+
+.hero-csa {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:rgba(200,146,26,.12);
+  border:1px solid rgba(200,146,26,.3);
+  border-radius:30px;
+  padding:8px 20px;
+  font-size:11px;
+  font-weight:700;
+  color:var(--gold);
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:0;
+  animation:fadeUp .8s .85s ease forwards;
+}
+
+.hero-csa::before {
+  content:'⚽';
+  font-size:16px;
+}
+
+/* Gold bar */
+.gold-bar {
+  height:3px;
+  background:linear-gradient(90deg, transparent, var(--gold) 20%, var(--glt) 60%, transparent);
+  flex-shrink:0;
+}
+
+/* ── NAV ── */
+nav {
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  background:rgba(13,21,37,.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(200,146,26,.2);
+  padding:12px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.nav-logo {
+  font-family:var(--bebas);
+  font-size:22px;
+  letter-spacing:.1em;
+  color:var(--glt);
+}
+
+.nav-logo span {
+  color:rgba(255,255,255,.4);
+  font-size:11px;
+  font-family:var(--font);
+  font-weight:600;
+  letter-spacing:.08em;
+  margin-left:8px;
+  vertical-align:middle;
+}
+
+.nav-links {
+  display:flex;
+  gap:24px;
+  list-style:none;
+}
+
+.nav-links a {
+  font-size:12px;
+  font-weight:700;
+  color:rgba(255,255,255,.5);
+  text-decoration:none;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  transition:color .2s;
+}
+
+.nav-links a:hover { color:var(--gold); }
+
+@media(max-width:600px) { .nav-links { display:none; } }
+
+/* ── APPS SECTION ── */
+.apps-section {
+  background:var(--nv3);
+  padding:80px 24px;
+}
+
+.section-header {
+  text-align:center;
+  margin-bottom:60px;
+}
+
+.section-eyebrow {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.3em;
+  color:var(--gold);
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+
+.section-title {
+  font-family:var(--bebas);
+  font-size:clamp(36px,7vw,56px);
+  letter-spacing:.04em;
+  color:var(--white);
+  margin-bottom:12px;
+}
+
+.section-sub {
+  font-size:15px;
+  color:var(--g4);
+  max-width:520px;
+  margin:0 auto;
+  line-height:1.6;
+}
+
+.apps-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+  gap:20px;
+  max-width:1100px;
+  margin:0 auto;
+}
+
+/* App card */
+.app-card {
+  background:var(--nv2);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:16px;
+  padding:28px 24px;
+  position:relative;
+  overflow:hidden;
+  transition:transform .2s, border-color .2s, box-shadow .2s;
+  text-decoration:none;
+  display:block;
+  cursor:pointer;
+}
+
+.app-card::before {
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg, var(--card-color, var(--gold)), transparent);
+  opacity:.7;
+}
+
+.app-card:hover {
+  transform:translateY(-4px);
+  border-color:rgba(200,146,26,.3);
+  box-shadow:0 20px 40px rgba(0,0,0,.3), 0 0 0 1px rgba(200,146,26,.15);
+}
+
+.app-card.live {
+  border-color:rgba(200,146,26,.25);
+  background:linear-gradient(135deg, #141C2E 0%, #1a2540 100%);
+}
+
+.app-card.live::after {
+  content:'LIVE';
+  position:absolute;
+  top:16px;right:16px;
+  background:var(--gold);
+  color:var(--nv);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.15em;
+  padding:3px 8px;
+  border-radius:10px;
+}
+
+.app-card.coming-soon {
+  opacity:.6;
+  cursor:default;
+}
+
+.app-card.coming-soon::after {
+  content:'COMING SOON';
+  position:absolute;
+  top:16px;right:16px;
+  background:rgba(255,255,255,.08);
+  color:var(--g4);
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.1em;
+  padding:3px 8px;
+  border-radius:10px;
+}
+
+.app-card.coming-soon:hover {
+  transform:none;
+  box-shadow:none;
+}
+
+.app-icon {
+  font-size:40px;
+  margin-bottom:16px;
+  display:block;
+  line-height:1;
+}
+
+.app-name {
+  font-family:var(--bebas);
+  font-size:26px;
+  letter-spacing:.06em;
+  color:var(--white);
+  margin-bottom:4px;
+}
+
+.app-name span {
+  color:var(--card-color, var(--gold));
+}
+
+.app-tagline {
+  font-size:12px;
+  font-weight:700;
+  color:var(--card-color, var(--gold));
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.app-desc {
+  font-size:13px;
+  color:var(--g4);
+  line-height:1.6;
+  margin-bottom:20px;
+}
+
+.app-features {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:20px;
+}
+
+.app-feat {
+  font-size:10px;
+  font-weight:700;
+  color:rgba(255,255,255,.5);
+  background:rgba(255,255,255,.06);
+  padding:3px 8px;
+  border-radius:10px;
+  letter-spacing:.05em;
+}
+
+.app-cta {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:var(--card-color, var(--gold));
+  color:var(--nv);
+  font-size:12px;
+  font-weight:800;
+  padding:9px 18px;
+  border-radius:8px;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  transition:opacity .15s;
+}
+
+.app-card:hover .app-cta { opacity:.85; }
+.app-card.coming-soon .app-cta {
+  background:rgba(255,255,255,.08);
+  color:var(--g6);
+}
+
+/* ── ABOUT SECTION ── */
+.about-section {
+  background:var(--nv);
+  padding:80px 24px;
+  position:relative;
+  overflow:hidden;
+}
+
+.about-section::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(-45deg,transparent,transparent 30px,rgba(255,255,255,.015) 30px,rgba(255,255,255,.015) 31px);
+  pointer-events:none;
+}
+
+.about-inner {
+  max-width:760px;
+  margin:0 auto;
+  text-align:center;
+  position:relative;
+  z-index:1;
+}
+
+.about-title {
+  font-family:var(--bebas);
+  font-size:clamp(32px,6vw,48px);
+  letter-spacing:.04em;
+  margin-bottom:20px;
+}
+
+.about-title span { color:var(--glt); }
+
+.about-body {
+  font-size:15px;
+  color:rgba(255,255,255,.65);
+  line-height:1.8;
+  margin-bottom:32px;
+}
+
+.about-body strong { color:var(--gold); font-weight:700; }
+
+.about-stats {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-top:48px;
+}
+
+.stat-box {
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(200,146,26,.2);
+  border-radius:12px;
+  padding:20px 16px;
+  text-align:center;
+}
+
+.stat-num {
+  font-family:var(--bebas);
+  font-size:42px;
+  color:var(--glt);
+  letter-spacing:.04em;
+  line-height:1;
+  margin-bottom:6px;
+}
+
+.stat-lbl {
+  font-size:11px;
+  font-weight:700;
+  color:var(--g6);
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+/* ── MISSION STRIP ── */
+.mission-strip {
+  background:var(--gold);
+  padding:24px;
+  text-align:center;
+}
+
+.mission-strip p {
+  font-family:var(--bebas);
+  font-size:clamp(18px,4vw,28px);
+  color:var(--nv);
+  letter-spacing:.08em;
+}
+
+.mission-strip span {
+  color:var(--nv2);
+  opacity:.7;
+}
+
+/* ── FOOTER ── */
+footer {
+  background:var(--nv2);
+  padding:40px 24px;
+  border-top:1px solid rgba(200,146,26,.15);
+}
+
+.footer-inner {
+  max-width:1000px;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.footer-brand {
+  font-family:var(--bebas);
+  font-size:24px;
+  color:var(--glt);
+  letter-spacing:.1em;
+}
+
+.footer-brand p {
+  font-family:var(--font);
+  font-size:11px;
+  color:var(--g6);
+  font-weight:400;
+  letter-spacing:.05em;
+  margin-top:4px;
+}
+
+.footer-tagline {
+  font-size:13px;
+  color:var(--g6);
+  font-style:italic;
+}
+
+.footer-tagline span {
+  color:var(--gold);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.reveal {
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.reveal.visible {
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ── SCROLL INDICATOR ── */
+.scroll-hint {
+  position:absolute;
+  bottom:32px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+  opacity:0;
+  animation:fadeUp .8s 1.4s ease forwards;
+}
+
+.scroll-hint span {
+  font-size:10px;
+  letter-spacing:.15em;
+  color:rgba(255,255,255,.3);
+  text-transform:uppercase;
+}
+
+.scroll-arrow {
+  width:24px;height:24px;
+  border-right:2px solid rgba(200,146,26,.5);
+  border-bottom:2px solid rgba(200,146,26,.5);
+  transform:rotate(45deg);
+  animation:bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%,100%{transform:rotate(45deg) translateY(0);}
+  50%{transform:rotate(45deg) translateY(4px);}
+}
+
+/* Mobile */
+@media(max-width:600px) {
+  .about-stats { grid-template-columns:1fr; }
+  .footer-inner { flex-direction:column; text-align:center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">C.R.E.S.T.<span>Colorado</span></div>
+  <ul class="nav-links">
+    <li><a href="#apps">Tools</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="https://github.com/CRESTColorado" target="_blank">GitHub</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Colorado Soccer Association</div>
+    <div class="hero-logo">
+      <div class="crest-badge">CREST</div>
+    </div>
+    <div class="hero-full-name">Colorado Referee Education &amp; Supplemental Training</div>
+    <div class="hero-tagline">Professional tools built <span>for the game</span> — by the people who love it</div>
+    <div class="hero-csa">Official CSA Referee Development Program</div>
+  </div>
+  <div class="scroll-hint">
+    <span>Explore Tools</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<div class="gold-bar"></div>
+<div style="background:var(--gold);padding:5px 24px;display:flex;justify-content:space-between;align-items:center">
+  <span style="font-family:var(--bebas);font-size:12px;letter-spacing:.12em;color:var(--nv)">Field Tools &nbsp;·&nbsp; Built for Colorado Referees</span>
+  <span style="font-size:10px;font-weight:700;color:var(--nv)">For the Love of the Game ⚽</span>
+</div>
+
+<!-- APPS -->
+<section class="apps-section" id="apps">
+  <div class="section-header reveal">
+    <div class="section-eyebrow">The CREST Suite</div>
+    <div class="section-title">Tools for Every Role</div>
+    <div class="section-sub">Each app is purpose-built for a specific role in the Colorado Soccer ecosystem — from referees on the field to parents in the stands.</div>
+  </div>
+
+  <div class="apps-grid">
+
+    <!-- EVALUATOR — LIVE -->
+    <a class="app-card live reveal" href="https://crestcolorado.github.io/CREST_Evaluator" style="--card-color:#F5C842">
+      <span class="app-icon">📋</span>
+      <div class="app-name">CREST <span>Evaluator</span></div>
+      <div class="app-tagline">For Referee Coaches</div>
+      <div class="app-desc">Live match evaluation tool. Log fouls, misconduct, goals and observations in real time. Auto-populates official US Soccer post-match forms with CMI and CRE tracking.</div>
+      <div class="app-features">
+        <span class="app-feat">Live Clock</span>
+        <span class="app-feat">Event Log</span>
+        <span class="app-feat">CMI / CRE</span>
+        <span class="app-feat">PDF Export</span>
+        <span class="app-feat">Works Offline</span>
+      </div>
+      <span class="app-cta">Open App &#8594;</span>
+    </a>
+
+    <!-- COACH -->
+    <div class="app-card coming-soon reveal" style="--card-color:#64b4ff">
+      <span class="app-icon">🎓</span>
+      <div class="app-name">CREST <span style="color:#64b4ff">Coach</span></div>
+      <div class="app-tagline">For Referee Coaches &amp; Instructors</div>
+      <div class="app-desc">Training session planning, referee development tracking, badge progression management, and course materials — all in one place.</div>
+      <div class="app-features">
+        <span class="app-feat">Session Planner</span>
+        <span class="app-feat">Dev Tracking</span>
+        <span class="app-feat">Badge Progress</span>
+      </div>
+      <span class="app-cta">Coming Soon</span>
+    </div>
+
+    <!-- GAME COORDINATOR -->
+    <div class="app-card coming-soon reveal" style="--card-color:#2ecc71">
+      <span class="app-icon">📅</span>
+      <div class="app-name">CREST <span style="color:#2ecc71">Coordinator</span></div>
+      <div class="app-tagline">For Game Coordinators &amp; Assignors</div>
+      <div class="app-desc">Game assignment management, referee availability tracking, crew building, and communication tools for tournament and league coordinators.</div>
+      <div class="app-features">
+        <span class="app-feat">Assignments</span>
+        <span class="app-feat">Availability</span>
+        <span class="app-feat">Crew Builder</span>
+      </div>
+      <span class="app-cta">Coming Soon</span>
+    </div>
+
+    <!-- PARENTS -->
+    <div class="app-card coming-soon reveal" style="--card-color:#e67e22">
+      <span class="app-icon">👪</span>
+      <div class="app-name">CREST <span style="color:#e67e22">Parents</span></div>
+      <div class="app-tagline">For Parents &amp; Spectators</div>
+      <div class="app-desc">Understand the game better. Learn the Laws of the Game, understand what referees are doing and why, and how to support the officials positively.</div>
+      <div class="app-features">
+        <span class="app-feat">Laws Guide</span>
+        <span class="app-feat">Signals</span>
+        <span class="app-feat">Sideline Guide</span>
+      </div>
+      <span class="app-cta">Coming Soon</span>
+    </div>
+
+    <!-- WRITER (teaser) -->
+    <div class="app-card coming-soon reveal" style="--card-color:#9b59b6">
+      <span class="app-icon">✍️</span>
+      <div class="app-name">CREST <span style="color:#9b59b6">Writer</span></div>
+      <div class="app-tagline">Evaluation Writing Assistant</div>
+      <div class="app-desc">Import your field evaluation PDF, then craft the full written evaluation with AI-assisted suggestions, tone guidance, and official form compatibility.</div>
+      <div class="app-features">
+        <span class="app-feat">PDF Import</span>
+        <span class="app-feat">AI Assist</span>
+        <span class="app-feat">RefEval Ready</span>
+      </div>
+      <span class="app-cta">Coming Soon</span>
+    </div>
+
+    <!-- LAWS REFERENCE -->
+    <div class="app-card coming-soon reveal" style="--card-color:#e63946">
+      <span class="app-icon">📖</span>
+      <div class="app-name">CREST <span style="color:#e63946">Laws</span></div>
+      <div class="app-tagline">Laws of the Game Reference</div>
+      <div class="app-desc">Quick-access Laws of the Game reference, decision trees for complex situations, and US Soccer interpretation guides — works completely offline.</div>
+      <div class="app-features">
+        <span class="app-feat">Full LOTG</span>
+        <span class="app-feat">Decision Trees</span>
+        <span class="app-feat">Offline</span>
+      </div>
+      <span class="app-cta">Coming Soon</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- MISSION STRIP -->
+<div class="mission-strip">
+  <p>Built by Ref Coaches &nbsp;<span>·</span>&nbsp; For Ref Coaches &nbsp;<span>·</span>&nbsp; For the Love of the Game ⚽</p>
+</div>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="reveal">
+      <div class="section-eyebrow" style="margin-bottom:12px">About CREST</div>
+      <div class="about-title">Developing <span>Colorado's</span><br>Referee Community</div>
+      <div class="about-body">
+        <strong>C.R.E.S.T.</strong> — Colorado Referee Education &amp; Supplemental Training — is a referee development program created under the Colorado Soccer Association to elevate the quality of officiating across the state.<br><br>
+        The CREST tool suite puts <strong>professional-grade tools</strong> in the hands of every referee coach, coordinator and official in Colorado. Built for the field. Built for the sideline. Built for the love of the game.<br><br>
+        Every tool is <strong>free, open source, and works offline</strong> — because great referee development shouldn't require a subscription.
+      </div>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat-box">
+        <div class="stat-num">CO</div>
+        <div class="stat-lbl">Colorado Soccer Association</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">6+</div>
+        <div class="stat-lbl">Apps in Development</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">100%</div>
+        <div class="stat-lbl">Free &amp; Offline-Capable</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="gold-bar"></div>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      C.R.E.S.T.
+      <p>Colorado Soccer Association &nbsp;·&nbsp; github.com/CRESTColorado</p>
+    </div>
+    <div class="footer-tagline">
+      <span>For the Love of the Game ⚽</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+var reveals = document.querySelectorAll('.reveal');
+var io = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Stagger children
+      var cards = e.target.parentElement.querySelectorAll('.reveal');
+      cards.forEach(function(c, i) {
+        c.style.transitionDelay = (i * 0.1) + 's';
+      });
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(function(r) { io.observe(r); });
+</script>
+</body>
+</html>

@@ -82,12 +82,37 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(11,16,37,.96
 .apps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:1100px;margin:0 auto;}.apps-grid-bottom{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:1100px;margin:18px auto 0;}
 .app-card{background:var(--nv2);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:26px 22px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s;text-decoration:none;display:block;}
 .app-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--c,var(--gold)),transparent);}
-.app-card.live{background:linear-gradient(135deg,#192d50 0%,#1e3360 100%);border-color:rgba(200,146,26,.3);}
-.app-card.live:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.3);}
+.app-card.live{
+  background:linear-gradient(135deg,#192d50 0%,#1e3360 100%);
+  border-color:rgba(200,146,26,.45);
+  box-shadow:0 0 0 1px rgba(200,146,26,.15), 0 8px 32px rgba(0,0,0,.25);
+}
+.app-card.live:hover{
+  transform:translateY(-5px);
+  border-color:rgba(200,146,26,.7);
+  box-shadow:0 0 0 1px rgba(200,146,26,.3), 0 20px 50px rgba(0,0,0,.4), 0 0 40px rgba(200,146,26,.08);
+}
+.app-card.live::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(135deg,rgba(200,146,26,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
 .app-card.soon{opacity:.65;cursor:default;}
 .app-badge{position:absolute;top:14px;right:14px;font-size:9px;font-weight:800;letter-spacing:.12em;padding:3px 9px;border-radius:10px;}
 .badge-live{background:var(--gold);color:var(--nv);}
 .badge-soon{background:rgba(255,255,255,.08);color:var(--g6);}
+.live-badge{
+  background:rgba(46,204,113,.2);
+  color:#2ecc71;
+  border:1px solid rgba(46,204,113,.45);
+  font-size:9px;font-weight:800;letter-spacing:.12em;
+  display:flex;align-items:center;gap:5px;
+  animation:livepulse 2.5s ease-in-out infinite;
+}
+@keyframes livepulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(46,204,113,.4);}
+  50%{box-shadow:0 0 0 5px rgba(46,204,113,.0);}
+}
 .badge-building{background:rgba(155,89,182,.18);color:#c9a0ff;border:1px solid rgba(155,89,182,.3);}
 .app-icon{font-size:36px;margin-bottom:13px;display:block;line-height:1;}
 .app-name{font-family:var(--bebas);font-size:23px;letter-spacing:.06em;margin-bottom:4px;}
@@ -304,12 +329,12 @@ footer{background:var(--nv2);padding:40px 24px 28px;border-top:1px solid rgba(20
   </div>
   <div class="apps-grid">
 
-    <div class="app-card soon reveal d1" style="--c:var(--red)">
-      <span class="app-badge badge-soon">Coming Soon</span>
+    <div class="app-card live reveal d1" style="--c:var(--red);cursor:pointer" onclick="window.open('https://coloradoreferee.github.io/CREST_Reference','_blank')">
+      <span class="app-badge live-badge">&#9679; Live Now</span>
       <span class="app-icon">📚</span>
       <div class="app-name">CREST <span>Reference Library</span></div>
       <div class="app-for">For Everyone</div>
-      <p class="app-desc">Quick-access Laws of the Game with US Soccer interpretations, decision trees for complex situations, signal guides, and the complete CSA Guide to Referees. Works completely offline.</p>
+      <p class="app-desc">31 reference modules covering all 17 Laws, the full CSA Guide to Referees 2025/26, game day procedures, signals, age groups, RAP policy, and contacts. Works completely offline on any device.</p>
       <div class="app-tags"><span class="atag">Full LOTG</span><span class="atag">Decision Trees</span><span class="atag">CSA Guide</span><span class="atag">Signals</span><span class="atag">Offline</span></div>
       <div class="app-cta">Coming Soon</div>
     </div>
@@ -336,8 +361,8 @@ footer{background:var(--nv2);padding:40px 24px 28px;border-top:1px solid rgba(20
 
   </div>
   <div class="apps-grid-bottom">
-    <div class="app-card reveal d4" style="--c:var(--purple);cursor:pointer" onclick="window.open('https://coloradoreferee.github.io/CREST_Academy','_blank')">
-      <span class="app-badge" style="background:rgba(46,204,113,.18);color:#2ecc71;border:1px solid rgba(46,204,113,.3)">&#9679; Live Now</span>
+    <div class="app-card live reveal d4" style="--c:var(--purple);cursor:pointer" onclick="window.open('https://coloradoreferee.github.io/CREST_Academy','_blank')">
+      <span class="app-badge live-badge">&#9679; Live Now</span>
       <span class="app-icon">🎓</span>
       <div class="app-name">CREST <span>Academy</span></div>
       <div class="app-for">For Students, CSA Lead Instructors &amp; Teachers</div>
@@ -347,7 +372,7 @@ footer{background:var(--nv2);padding:40px 24px 28px;border-top:1px solid rgba(20
     </div>
 
     <a href="./CREST_Evaluator" class="app-card live reveal d4" style="--c:var(--glt)">
-      <span class="app-badge badge-live">● Live Now</span>
+      <span class="app-badge live-badge">&#9679; Live Now</span>
       <span class="app-icon">📋</span>
       <div class="app-name">CREST <span>Evaluator</span></div>
       <div class="app-for">For Referee Coaches</div>

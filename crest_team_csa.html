@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<meta name="description" content="CREST Team. Colorado Soccer Association. Referee education and respect built into every club.">
+<meta name="theme-color" content="#1B2F55">
+<link rel="icon" type="image/png" href="logo-csa.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>CREST Team · Colorado Soccer Association</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- ════════════════════════════════════════════════════════════════════════════
+     CREST TEAM. CLUB CONFIGURATION
+     To create a new club version: copy this file, swap this block, swap logo path.
+     Everything else stays identical.
+═══════════════════════════════════════════════════════════════════════════════ -->
+<script>
+const CLUB_CONFIG = {
+  id        : "csa",
+  name      : "Colorado Soccer Association",
+  short     : "CSA",
+  established: "1978",
+  location  : "Statewide",
+  primary   : "#1B2F55",  /* deep navy */
+  primaryD  : "#0D1525",  /* darker navy for backgrounds */
+  primaryL  : "#2A4677",  /* lighter navy for hover */
+  accent    : "#C8921A",  /* gold */
+  accentL   : "#F5C842",  /* light gold */
+  textOnPrimary: "#FFFFFF",
+  logo      : "logo-csa.png",
+  tagline   : "The state association. The reference for every club.",
+  isCSA     : true   /* CSA gets a slightly different framing (no "powered by") */
+};
+</script>
+
+<style>
+:root{
+  --primary  : #1B2F55;
+  --primary-d: #0D1525;
+  --primary-l: #2A4677;
+  --accent   : #C8921A;
+  --accent-l : #F5C842;
+  --on-primary: #FFFFFF;
+
+  /* shared neutrals (from CREST Reference Library. keep the suite cohesive) */
+  --nv      : #1B2F55;
+  --nv2     : #141C2E;
+  --nv3     : #0D1525;
+  --nv4     : #0a1020;
+  --gold    : #C8921A;
+  --glt     : #F5C842;
+  --red     : #e63946;
+  --grn     : #2ecc71;
+  --orng    : #e67e22;
+  --g4      : #adb5bd;
+  --g6      : #6c757d;
+  --g8      : #343a40;
+
+  --bebas   : "Bebas Neue", sans-serif;
+  --font    : "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* audience colors */
+  --aud-coach  : #64b4ff;
+  --aud-player : #2ecc71;
+  --aud-parent : #f5c842;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;font-family:var(--font);background:var(--primary-d);color:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+img{display:block;max-width:100%;}
+
+/* ══════════════════════════════════════════════════════════════
+   SPLASH SCREEN. first impression, club crest hero
+═══════════════════════════════════════════════════════════════*/
+.splash{
+  min-height:100dvh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:32px 24px;
+  text-align:center;
+  background:
+    radial-gradient(ellipse at top, rgba(255,255,255,.04), transparent 60%),
+    radial-gradient(ellipse at bottom, rgba(200,146,26,.08), transparent 55%),
+    linear-gradient(180deg, var(--primary-d) 0%, var(--primary) 100%);
+  position:relative;
+  overflow:hidden;
+}
+.splash::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 38px, rgba(255,255,255,.015) 38px 39px);
+  pointer-events:none;
+}
+.splash-marks{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin-bottom:20px;
+  opacity:0;animation:fadeUp .6s ease .1s forwards;
+}
+.splash-marks img.mark{height:48px;width:auto;opacity:.7;}
+.splash-marks .sep{
+  font-family:var(--bebas);font-size:18px;color:var(--accent);opacity:.5;
+  letter-spacing:.1em;
+}
+.splash-crest{
+  width:min(220px, 55vw);height:auto;
+  margin:0 auto 24px;
+  filter:drop-shadow(0 12px 30px rgba(0,0,0,.45));
+  opacity:0;animation:crestIn .8s cubic-bezier(.2,.8,.2,1) .2s forwards;
+}
+.splash-eyebrow{
+  font-family:var(--bebas);letter-spacing:.18em;font-size:13px;
+  color:var(--accent-l);opacity:0;
+  animation:fadeUp .6s ease .35s forwards;
+  margin-bottom:6px;
+}
+.splash-title{
+  font-family:var(--bebas);font-size:clamp(34px, 7vw, 54px);
+  letter-spacing:.04em;line-height:1;color:#fff;
+  opacity:0;animation:fadeUp .6s ease .45s forwards;
+  margin-bottom:8px;
+}
+.splash-sub{
+  font-size:14px;color:rgba(255,255,255,.65);font-weight:400;
+  max-width:480px;margin:0 auto 36px;line-height:1.5;
+  opacity:0;animation:fadeUp .6s ease .55s forwards;
+}
+.splash-cta{
+  background:var(--accent);color:var(--primary-d);
+  padding:16px 32px;border-radius:14px;
+  font-family:var(--bebas);letter-spacing:.1em;font-size:18px;
+  box-shadow:0 8px 24px rgba(200,146,26,.35);
+  opacity:0;animation:fadeUp .6s ease .65s forwards, pulse 2.4s ease 1.5s infinite;
+  transition:transform .15s, box-shadow .15s;
+}
+.splash-cta:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(200,146,26,.5);}
+.splash-cta:active{transform:translateY(0);}
+.splash-footer{
+  position:absolute;bottom:18px;left:0;right:0;
+  text-align:center;font-size:10px;letter-spacing:.16em;
+  color:rgba(255,255,255,.35);text-transform:uppercase;
+  opacity:0;animation:fadeUp .6s ease .85s forwards;
+}
+.splash-footer strong{color:var(--accent-l);font-weight:700;}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+@keyframes crestIn{from{opacity:0;transform:scale(.85) translateY(8px);}to{opacity:1;transform:scale(1) translateY(0);}}
+@keyframes pulse{0%,100%{box-shadow:0 8px 24px rgba(200,146,26,.35);}50%{box-shadow:0 8px 24px rgba(200,146,26,.55), 0 0 0 8px rgba(200,146,26,.06);}}
+
+/* ══════════════════════════════════════════════════════════════
+   AUDIENCE PICKER. Coach / Players / Parents
+═══════════════════════════════════════════════════════════════*/
+.picker{
+  min-height:100dvh;
+  padding:24px 20px 80px;
+  background:linear-gradient(180deg, var(--primary-d), var(--nv2) 80%);
+  display:none;
+  flex-direction:column;
+}
+.picker.active{display:flex;}
+.picker-head{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:24px;
+  padding-top:8px;
+}
+.picker-head .back-btn{
+  font-size:13px;color:rgba(255,255,255,.5);
+  padding:8px 12px;border-radius:8px;
+  transition:background .15s;
+}
+.picker-head .back-btn:hover{background:rgba(255,255,255,.06);color:#fff;}
+.picker-marks{
+  display:flex;align-items:center;gap:8px;
+}
+.picker-marks img{height:28px;opacity:.85;}
+.picker-marks .club-name-mini{
+  font-family:var(--bebas);font-size:14px;letter-spacing:.08em;
+  color:var(--accent-l);line-height:1;
+}
+.picker-marks .club-name-mini small{
+  display:block;font-size:8px;letter-spacing:.16em;
+  color:rgba(255,255,255,.4);font-family:var(--font);font-weight:600;
+  text-transform:uppercase;margin-top:2px;
+}
+.picker-intro{
+  text-align:center;
+  margin:24px auto 36px;
+  max-width:520px;
+}
+.picker-intro h1{
+  font-family:var(--bebas);font-size:clamp(28px,6vw,40px);
+  letter-spacing:.04em;line-height:1.05;
+  margin-bottom:10px;
+}
+.picker-intro h1 .accent{color:var(--accent);}
+.picker-intro p{
+  font-size:14px;color:rgba(255,255,255,.6);line-height:1.55;
+}
+.aud-grid{
+  display:grid;gap:14px;
+  max-width:560px;width:100%;margin:0 auto;
+  grid-template-columns:1fr;
+}
+@media(min-width:640px){.aud-grid{grid-template-columns:repeat(3,1fr);}}
+.aud-card{
+  background:linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+  border:1.5px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:24px 20px;
+  text-align:left;
+  position:relative;
+  transition:all .2s;
+  overflow:hidden;
+  min-height:170px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.aud-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--aud-c);
+  opacity:.9;
+}
+.aud-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--aud-c);
+  box-shadow:0 12px 32px rgba(0,0,0,.4), 0 0 0 1px var(--aud-c);
+}
+.aud-icon{
+  font-size:32px;
+  margin-bottom:8px;
+  filter:drop-shadow(0 4px 10px rgba(0,0,0,.4));
+}
+.aud-card[data-aud="coach"]{--aud-c:var(--aud-coach);}
+.aud-card[data-aud="player"]{--aud-c:var(--aud-player);}
+.aud-card[data-aud="parent"]{--aud-c:var(--aud-parent);}
+.aud-title{
+  font-family:var(--bebas);font-size:28px;letter-spacing:.04em;
+  color:#fff;line-height:1;margin-bottom:6px;
+}
+.aud-sub{
+  font-size:12px;color:rgba(255,255,255,.55);line-height:1.4;
+  margin-bottom:14px;
+}
+.aud-arrow{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--bebas);font-size:13px;letter-spacing:.1em;
+  color:var(--aud-c);
+}
+.picker-foot{
+  margin-top:auto;padding-top:32px;
+  text-align:center;
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+}
+.picker-foot strong{color:var(--accent-l);}
+
+/* ══════════════════════════════════════════════════════════════
+   AUDIENCE VIEW. header, section nav, content
+═══════════════════════════════════════════════════════════════*/
+.audience{
+  display:none;
+  min-height:100dvh;
+  background:var(--primary-d);
+  flex-direction:column;
+}
+.audience.active{display:flex;}
+
+.aud-header{
+  background:var(--primary);
+  border-bottom:2px solid var(--accent);
+  padding:10px 16px;
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;
+}
+.aud-header .back{
+  font-size:12px;font-weight:600;
+  padding:6px 10px;border-radius:8px;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  display:flex;align-items:center;gap:4px;
+}
+.aud-header .h-club{
+  display:flex;align-items:center;gap:8px;
+  flex:1;justify-content:center;
+}
+.aud-header .h-club img{height:30px;width:auto;}
+.aud-header .h-club .h-club-text{
+  font-family:var(--bebas);font-size:16px;letter-spacing:.08em;
+  color:#fff;line-height:1;
+}
+.aud-header .h-club .h-club-text small{
+  display:block;font-size:8px;letter-spacing:.18em;
+  color:var(--accent-l);font-family:var(--font);font-weight:700;
+  margin-top:2px;
+}
+.aud-header .rap-btn{
+  background:var(--red);color:#fff;
+  padding:7px 12px;border-radius:8px;
+  font-size:11px;font-weight:800;letter-spacing:.05em;
+  display:flex;align-items:center;gap:5px;
+  box-shadow:0 4px 10px rgba(230,57,70,.35);
+  transition:transform .12s;
+}
+.aud-header .rap-btn:hover{transform:translateY(-1px);}
+
+.aud-banner{
+  padding:18px 20px;
+  background:linear-gradient(135deg, var(--aud-c), transparent 80%), var(--primary-d);
+  display:flex;align-items:center;gap:12px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.aud-banner .aud-bg-icon{
+  font-size:34px;
+  filter:drop-shadow(0 4px 8px rgba(0,0,0,.3));
+}
+.aud-banner .aud-bg-text h2{
+  font-family:var(--bebas);font-size:24px;letter-spacing:.04em;line-height:1;
+}
+.aud-banner .aud-bg-text p{
+  font-size:12px;color:rgba(255,255,255,.7);margin-top:3px;
+}
+.audience[data-aud="coach"] .aud-banner{--aud-c:rgba(100,180,255,.25);}
+.audience[data-aud="player"] .aud-banner{--aud-c:rgba(46,204,113,.25);}
+.audience[data-aud="parent"] .aud-banner{--aud-c:rgba(245,200,66,.25);}
+
+.section-nav{
+  display:flex;gap:6px;padding:10px 16px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  background:var(--nv2);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  position:sticky;top:54px;z-index:40;
+}
+.section-nav::-webkit-scrollbar{display:none;}
+.sec-pill{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;padding:7px 13px;
+  font-size:11px;font-weight:700;letter-spacing:.04em;
+  color:rgba(255,255,255,.55);
+  white-space:nowrap;flex-shrink:0;
+  transition:all .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.sec-pill.active{
+  background:var(--accent);color:var(--primary-d);
+  border-color:var(--accent);
+}
+
+.aud-main{
+  flex:1;padding:18px 16px 100px;
+  max-width:740px;width:100%;margin:0 auto;
+}
+
+/* CONTENT BLOCKS */
+.block{
+  background:var(--nv2);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;
+  padding:18px 18px 4px;
+  margin-bottom:14px;
+  display:none;
+  animation:blockIn .35s ease;
+}
+.block.active{display:block;}
+@keyframes blockIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.block h2{
+  font-family:var(--bebas);font-size:22px;letter-spacing:.04em;
+  margin-bottom:4px;color:#fff;
+}
+.block .eyebrow{
+  font-size:9px;letter-spacing:.18em;color:var(--accent-l);
+  text-transform:uppercase;font-weight:700;margin-bottom:6px;
+}
+.block .sub{
+  font-size:13px;color:rgba(255,255,255,.55);margin-bottom:14px;line-height:1.5;
+}
+.block h3{
+  font-family:var(--bebas);font-size:15px;letter-spacing:.06em;
+  color:var(--accent-l);
+  border-top:1px solid rgba(255,255,255,.06);
+  padding-top:14px;margin-top:14px;margin-bottom:8px;
+}
+.block h3:first-of-type{border-top:none;padding-top:0;margin-top:0;}
+.block p{font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.82);margin-bottom:10px;}
+.block ul{list-style:none;padding:0;}
+.block li{
+  font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.82);
+  padding:6px 0 6px 22px;position:relative;
+}
+.block li::before{
+  content:"";position:absolute;left:6px;top:13px;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--accent);
+}
+.block li.chk{padding-left:30px;}
+.block li.chk::before{
+  content:"✓";background:none;color:var(--grn);
+  font-weight:700;font-size:14px;top:6px;left:6px;width:auto;height:auto;border-radius:0;
+}
+.block li.x{padding-left:30px;}
+.block li.x::before{
+  content:"✕";background:none;color:var(--red);
+  font-weight:700;font-size:14px;top:6px;left:6px;width:auto;height:auto;border-radius:0;
+}
+.block strong{color:#fff;}
+.block em{color:var(--accent-l);font-style:normal;font-weight:600;}
+
+.callout{
+  border-radius:10px;padding:12px 14px;
+  margin:10px 0;
+  font-size:13px;line-height:1.5;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.callout .ico{font-size:18px;flex-shrink:0;line-height:1.2;}
+.callout.warn{background:rgba(230,126,34,.1);border:1px solid rgba(230,126,34,.3);color:#ffd5b3;}
+.callout.alert{background:rgba(230,57,70,.1);border:1px solid rgba(230,57,70,.35);color:#ffc6cb;}
+.callout.info{background:rgba(100,180,255,.1);border:1px solid rgba(100,180,255,.3);color:#cce4ff;}
+.callout.good{background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.3);color:#bff0d4;}
+.callout.gold{background:rgba(200,146,26,.1);border:1px solid rgba(200,146,26,.35);color:#f5e2b8;}
+
+/* Quiz launcher */
+.quiz-launch{
+  margin:16px 0;
+  padding:18px 16px;
+  background:linear-gradient(135deg, rgba(100,180,255,.15), rgba(100,180,255,.05));
+  border:1px solid rgba(100,180,255,.3);
+  border-radius:12px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;
+  flex-wrap:wrap;
+}
+.quiz-launch .ql-text{flex:1;min-width:180px;}
+.quiz-launch .ql-text h4{
+  font-family:var(--bebas);font-size:18px;letter-spacing:.04em;color:#fff;
+  margin-bottom:3px;
+}
+.quiz-launch .ql-text p{font-size:12px;color:rgba(255,255,255,.6);margin:0;}
+.quiz-launch button{
+  background:var(--aud-coach);color:var(--primary-d);
+  padding:11px 18px;border-radius:10px;
+  font-family:var(--bebas);font-size:14px;letter-spacing:.08em;
+  font-weight:700;
+}
+.quiz-launch.completed{
+  background:linear-gradient(135deg, rgba(46,204,113,.15), rgba(46,204,113,.05));
+  border-color:rgba(46,204,113,.35);
+}
+.quiz-launch.completed button{background:var(--grn);}
+.quiz-launch.completed .ql-text h4::before{content:"✓ ";color:var(--grn);}
+
+/* Recruitment card (Players audience) */
+.recruit-card{
+  background:linear-gradient(135deg, var(--accent), var(--accent-l));
+  color:var(--primary-d);
+  border-radius:14px;padding:20px 18px;
+  margin:14px 0;
+  position:relative;overflow:hidden;
+}
+.recruit-card::before{
+  content:"⚽";position:absolute;right:-10px;bottom:-20px;
+  font-size:120px;opacity:.12;pointer-events:none;
+}
+.recruit-card h3{
+  font-family:var(--bebas);font-size:24px;letter-spacing:.04em;
+  color:var(--primary-d);border:none;padding:0;margin:0 0 6px;
+}
+.recruit-card p{color:rgba(13,21,37,.85);font-size:13.5px;margin-bottom:12px;}
+.recruit-card .pay-row{
+  display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;
+}
+.recruit-card .pay-pill{
+  background:rgba(13,21,37,.9);color:var(--accent-l);
+  padding:6px 11px;border-radius:18px;
+  font-size:11px;font-weight:700;letter-spacing:.04em;
+}
+.recruit-card .pay-pill strong{color:#fff;}
+.recruit-card .cta{
+  background:var(--primary-d);color:var(--accent-l);
+  padding:10px 16px;border-radius:9px;
+  font-family:var(--bebas);font-size:14px;letter-spacing:.08em;
+  display:inline-block;
+}
+
+/* Sneak peek (CSA Coaching teaser) */
+.sneak-peek{
+  background:repeating-linear-gradient(135deg, rgba(255,255,255,.03) 0 12px, rgba(255,255,255,.06) 12px 24px);
+  border:1px dashed rgba(255,255,255,.18);
+  border-radius:12px;
+  padding:16px;
+  margin:12px 0;
+}
+.sneak-peek .sp-label{
+  display:inline-block;
+  background:var(--accent);color:var(--primary-d);
+  font-size:9px;letter-spacing:.16em;font-weight:800;
+  padding:3px 8px;border-radius:4px;
+  margin-bottom:10px;text-transform:uppercase;
+}
+.sneak-peek h4{
+  font-family:var(--bebas);font-size:18px;letter-spacing:.04em;
+  color:#fff;margin-bottom:4px;
+}
+.sneak-peek p{font-size:12.5px;color:rgba(255,255,255,.6);margin-bottom:10px;line-height:1.5;}
+.sneak-peek .sp-tag{
+  display:inline-block;
+  font-size:10px;color:var(--accent-l);
+  background:rgba(200,146,26,.12);
+  border:1px solid rgba(200,146,26,.25);
+  padding:3px 8px;border-radius:6px;
+  margin-right:4px;margin-bottom:4px;
+  letter-spacing:.04em;font-weight:600;
+}
+
+/* Footer (every audience) */
+.aud-foot{
+  padding:24px 16px 36px;
+  text-align:center;
+  font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);
+  border-top:1px solid rgba(255,255,255,.04);
+  margin-top:24px;
+}
+.aud-foot strong{color:var(--accent-l);}
+
+/* ══════════════════════════════════════════════════════════════
+   MODALS. RAP report, Quiz, Certificate
+═══════════════════════════════════════════════════════════════*/
+.modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;
+  z-index:200;padding:16px;
+}
+.modal.active{display:flex;animation:modalIn .2s ease;}
+@keyframes modalIn{from{opacity:0;}to{opacity:1;}}
+.modal-card{
+  background:var(--nv2);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:16px;
+  width:100%;max-width:480px;max-height:90dvh;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  animation:cardIn .25s cubic-bezier(.2,.8,.2,1);
+}
+@keyframes cardIn{from{transform:translateY(20px) scale(.96);opacity:0;}to{transform:none;opacity:1;}}
+.modal-head{
+  padding:16px 18px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;
+}
+.modal-head h3{
+  font-family:var(--bebas);font-size:18px;letter-spacing:.06em;color:#fff;
+}
+.modal-close{
+  width:32px;height:32px;border-radius:8px;
+  background:rgba(255,255,255,.06);color:#fff;
+  font-size:18px;
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-body{
+  padding:18px;overflow-y:auto;flex:1;
+}
+.modal-foot{
+  padding:14px 18px;
+  border-top:1px solid rgba(255,255,255,.08);
+  display:flex;gap:10px;justify-content:flex-end;
+  flex-shrink:0;
+  background:rgba(0,0,0,.2);
+}
+.btn{
+  padding:10px 16px;border-radius:9px;
+  font-family:var(--bebas);font-size:14px;letter-spacing:.08em;
+  font-weight:700;
+  transition:transform .12s, box-shadow .12s;
+}
+.btn:active{transform:scale(.97);}
+.btn-primary{background:var(--accent);color:var(--primary-d);}
+.btn-primary:hover{box-shadow:0 6px 18px rgba(200,146,26,.4);}
+.btn-secondary{background:rgba(255,255,255,.08);color:#fff;}
+.btn-danger{background:var(--red);color:#fff;}
+.btn-success{background:var(--grn);color:#fff;}
+.btn-disabled{background:rgba(255,255,255,.06);color:rgba(255,255,255,.3);pointer-events:none;}
+
+/* RAP modal */
+.rap-modal .modal-head{background:var(--red);border-color:rgba(0,0,0,.3);}
+.rap-modal .modal-head h3{color:#fff;}
+.rap-modal p{font-size:13.5px;line-height:1.6;color:rgba(255,255,255,.82);margin-bottom:12px;}
+.rap-modal .rap-row{
+  display:flex;gap:10px;margin:14px 0;flex-wrap:wrap;
+}
+.rap-modal .rap-row a{
+  flex:1;min-width:140px;
+  background:rgba(230,57,70,.12);
+  border:1px solid rgba(230,57,70,.35);
+  border-radius:10px;
+  padding:12px 14px;
+  display:flex;flex-direction:column;gap:3px;
+  font-size:12px;color:rgba(255,255,255,.65);
+  transition:background .15s;
+}
+.rap-modal .rap-row a:hover{background:rgba(230,57,70,.2);}
+.rap-modal .rap-row a strong{
+  font-family:var(--bebas);font-size:18px;letter-spacing:.04em;
+  color:#fff;letter-spacing:.04em;
+}
+
+/* Quiz */
+.quiz-name input{
+  width:100%;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;padding:12px 14px;
+  color:#fff;font-size:15px;font-family:var(--font);
+  margin-top:10px;
+}
+.quiz-name input:focus{outline:none;border-color:var(--accent);}
+.quiz-progress{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:12px;
+  font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.5);
+  text-transform:uppercase;font-weight:700;
+}
+.quiz-progress .q-score{color:var(--accent-l);}
+.quiz-bar{
+  height:4px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;
+  margin-bottom:18px;
+}
+.quiz-bar > div{
+  height:100%;background:var(--accent);
+  transition:width .3s;
+}
+.quiz-question{
+  font-family:var(--bebas);font-size:20px;letter-spacing:.02em;
+  color:#fff;line-height:1.25;margin-bottom:14px;
+}
+.quiz-options{display:flex;flex-direction:column;gap:8px;}
+.quiz-opt{
+  background:rgba(255,255,255,.05);
+  border:1.5px solid rgba(255,255,255,.1);
+  border-radius:10px;padding:12px 14px;
+  text-align:left;font-size:13.5px;line-height:1.4;color:#fff;
+  display:flex;gap:10px;align-items:flex-start;
+  transition:all .15s;
+}
+.quiz-opt:hover:not(.locked){background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);}
+.quiz-opt .opt-letter{
+  width:24px;height:24px;border-radius:6px;
+  background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--bebas);font-size:12px;letter-spacing:0;
+  flex-shrink:0;
+}
+.quiz-opt.correct{background:rgba(46,204,113,.18);border-color:var(--grn);}
+.quiz-opt.correct .opt-letter{background:var(--grn);color:var(--primary-d);}
+.quiz-opt.wrong{background:rgba(230,57,70,.18);border-color:var(--red);}
+.quiz-opt.wrong .opt-letter{background:var(--red);color:#fff;}
+.quiz-opt.locked{pointer-events:none;}
+
+.quiz-feedback{
+  margin-top:14px;
+  padding:14px;border-radius:10px;
+  font-size:13px;line-height:1.55;
+  display:none;
+}
+.quiz-feedback.show{display:block;animation:fadeUp .25s;}
+.quiz-feedback.correct{background:rgba(46,204,113,.1);border:1px solid rgba(46,204,113,.3);}
+.quiz-feedback.wrong{background:rgba(230,57,70,.1);border:1px solid rgba(230,57,70,.3);}
+.quiz-feedback strong{color:#fff;display:block;margin-bottom:4px;font-family:var(--bebas);font-size:15px;letter-spacing:.04em;}
+.quiz-feedback.correct strong{color:var(--grn);}
+.quiz-feedback.wrong strong{color:#ffb1b8;}
+
+/* Quiz result + certificate */
+.quiz-result{text-align:center;padding:10px 0;}
+.quiz-result .big-score{
+  font-family:var(--bebas);font-size:64px;letter-spacing:.02em;
+  color:var(--accent);line-height:1;margin-bottom:6px;
+}
+.quiz-result .score-sub{
+  font-size:12px;letter-spacing:.1em;color:rgba(255,255,255,.5);
+  text-transform:uppercase;margin-bottom:18px;
+}
+.quiz-result.pass .big-score{color:var(--grn);}
+.quiz-result.fail .big-score{color:var(--red);}
+.quiz-result h4{
+  font-family:var(--bebas);font-size:22px;letter-spacing:.04em;
+  color:#fff;margin-bottom:6px;
+}
+.quiz-result p{font-size:13px;color:rgba(255,255,255,.65);margin-bottom:14px;line-height:1.55;}
+
+/* Certificate */
+.cert{
+  background:linear-gradient(160deg, #fefcf5, #f0e6c8);
+  color:#1a1a1a;
+  border:6px solid var(--primary);
+  border-radius:8px;
+  padding:24px 18px;
+  position:relative;
+  margin:6px auto 0;
+  max-width:380px;
+  font-family:var(--font);
+  box-shadow:0 10px 30px rgba(0,0,0,.5);
+}
+.cert::before, .cert::after{
+  content:"";position:absolute;
+  border:1px solid var(--accent);
+}
+.cert::before{inset:4px;border-radius:4px;}
+.cert::after{inset:8px;border-style:dashed;opacity:.4;border-radius:2px;}
+.cert-inner{position:relative;text-align:center;}
+.cert .c-logos{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  margin-bottom:10px;
+}
+.cert .c-logos img{height:32px;width:auto;}
+.cert .c-eyebrow{
+  font-family:var(--bebas);font-size:11px;letter-spacing:.2em;
+  color:var(--primary);font-weight:400;
+  margin-bottom:4px;
+}
+.cert .c-title{
+  font-family:var(--bebas);font-size:24px;letter-spacing:.04em;
+  color:var(--primary);line-height:1.05;margin-bottom:14px;
+}
+.cert .c-presented{
+  font-size:11px;color:#666;letter-spacing:.06em;
+  text-transform:uppercase;margin-bottom:6px;
+}
+.cert .c-name{
+  font-family:var(--bebas);font-size:30px;letter-spacing:.02em;
+  color:#1a1a1a;line-height:1;margin-bottom:14px;
+  border-bottom:1.5px solid var(--accent);padding-bottom:8px;
+}
+.cert .c-statement{
+  font-size:12.5px;line-height:1.5;color:#333;
+  margin-bottom:14px;
+}
+.cert .c-statement strong{color:var(--primary);}
+.cert .c-meta{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  font-size:10px;letter-spacing:.06em;color:#666;
+  text-transform:uppercase;margin-top:14px;padding-top:10px;
+  border-top:1px solid rgba(0,0,0,.1);
+}
+.cert .c-meta .c-line strong{
+  display:block;color:#1a1a1a;font-size:12px;
+  font-family:var(--bebas);letter-spacing:.04em;margin-top:2px;
+}
+
+/* HUD-level helpers */
+.hidden{display:none !important;}
+
+/* Print: certificate */
+@media print{
+  body{background:#fff;}
+  .audience, .splash, .picker, .modal{display:none !important;}
+  #print-cert{display:block !important;background:#fff;padding:40px;}
+  #print-cert .cert{max-width:600px;margin:0 auto;box-shadow:none;}
+}
+#print-cert{display:none;}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════
+     SPLASH SCREEN
+═══════════════════════════════════════════════════════════════ -->
+<section id="splash" class="splash">
+  <div class="splash-marks">
+    <img class="mark" src="logo-csa.png" alt="CSA">
+    <span class="sep">·</span>
+    <img class="mark" src="logo-csrp.png" alt="CSRP">
+  </div>
+  <img class="splash-crest" id="splash-crest" src="logo-csa.png" alt="">
+  <div class="splash-eyebrow" id="splash-eyebrow">CREST TEAM · 2025/26 SEASON</div>
+  <h1 class="splash-title" id="splash-title">COLORADO SOCCER ASSOCIATION</h1>
+  <p class="splash-sub" id="splash-sub">
+    The referee respect, education, and recruitment program built by CSA for every Colorado club.
+    Choose your role to begin.
+  </p>
+  <button class="splash-cta" onclick="goPicker()">Choose Your Audience →</button>
+  <div class="splash-footer">A <strong>CREST</strong> program · <strong>Colorado Soccer Association</strong></div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     AUDIENCE PICKER
+═══════════════════════════════════════════════════════════════ -->
+<section id="picker" class="picker">
+  <div class="picker-head">
+    <button class="back-btn" onclick="goSplash()">← Home</button>
+    <div class="picker-marks">
+      <img src="logo-csa.png" alt="CSA">
+      <div class="club-name-mini" id="picker-club-name">CSA<small>CREST Team</small></div>
+      <img src="logo-csrp.png" alt="CREST">
+    </div>
+  </div>
+  <div class="picker-intro">
+    <h1>Who are <span class="accent">you</span> today?</h1>
+    <p>This app is built for three audiences. Pick the role you're showing up in right now. You can switch anytime.</p>
+  </div>
+  <div class="aud-grid">
+    <button class="aud-card" data-aud="coach" onclick="goAudience('coach')">
+      <div>
+        <div class="aud-icon">⚽</div>
+        <div class="aud-title">Coach</div>
+        <div class="aud-sub">Laws, law changes, how to talk to refs, what gets you carded.</div>
+      </div>
+      <div class="aud-arrow">Enter →</div>
+    </button>
+    <button class="aud-card" data-aud="player" onclick="goAudience('player')">
+      <div>
+        <div class="aud-icon">🏃</div>
+        <div class="aud-title">Players</div>
+        <div class="aud-sub">Know the laws. Become a ref. Earn money while you stay in the game.</div>
+      </div>
+      <div class="aud-arrow">Enter →</div>
+    </button>
+    <button class="aud-card" data-aud="parent" onclick="goAudience('parent')">
+      <div>
+        <div class="aud-icon">👨‍👩‍👧</div>
+        <div class="aud-title">Parents</div>
+        <div class="aud-sub">Sideline conduct, the Green Badge, RAP, and how to support the game.</div>
+      </div>
+      <div class="aud-arrow">Enter →</div>
+    </button>
+  </div>
+  <div class="picker-foot">
+    A <strong>CREST</strong> Program · <strong>Colorado Soccer Association</strong>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     AUDIENCE VIEWS (one DOM, content swaps)
+═══════════════════════════════════════════════════════════════ -->
+<section id="audience" class="audience" data-aud="coach">
+  <header class="aud-header">
+    <button class="back" onclick="goPicker()">← Switch</button>
+    <div class="h-club">
+      <img src="logo-csa.png" id="aud-club-logo" alt="">
+      <div class="h-club-text" id="aud-club-text">CSA<small>CREST Team</small></div>
+    </div>
+    <button class="rap-btn" onclick="openRAP()">🛑 RAP</button>
+  </header>
+
+  <div class="aud-banner">
+    <div class="aud-bg-icon" id="aud-banner-icon">⚽</div>
+    <div class="aud-bg-text">
+      <h2 id="aud-banner-title">COACH</h2>
+      <p id="aud-banner-sub">Your CREST briefing for the season</p>
+    </div>
+  </div>
+
+  <nav class="section-nav" id="section-nav"></nav>
+
+  <main class="aud-main" id="aud-main"></main>
+
+  <div class="aud-foot">
+    <strong>CREST</strong> · Powered by <strong>Colorado Soccer Association</strong> · 2025/26
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     MODALS
+═══════════════════════════════════════════════════════════════ -->
+
+<!-- RAP -->
+<div id="rap-modal" class="modal rap-modal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>🛑 RAP · Referee Abuse Prevention</h3>
+      <button class="modal-close" onclick="closeRAP()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p>U.S. Soccer Policy 531-9 protects every referee at every sanctioned match in Colorado. If you witness or experience abuse on the field, report it.</p>
+      <div class="rap-row">
+        <a href="mailto:rapreporting@coloradoreferees.com?subject=RAP%20Incident%20Report">
+          ✉ Email Report
+          <strong>rapreporting@coloradoreferees.com</strong>
+        </a>
+        <a href="tel:3035297718">
+          📞 Phone
+          <strong>303.529.7718</strong>
+        </a>
+      </div>
+      <p style="font-size:12px;color:rgba(255,255,255,.55);">
+        <strong>If a referee with a green badge is involved (under 18), penalties are increased.</strong> Coaches, players, parents, and spectators all fall under this policy.
+      </p>
+      <div class="callout alert">
+        <span class="ico">⚠</span>
+        <span>If anyone is in immediate physical danger, call 911 first.</span>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeRAP()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div id="quiz-modal" class="modal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="quiz-title">Laws Quiz</h3>
+      <button class="modal-close" onclick="closeQuiz()">✕</button>
+    </div>
+    <div class="modal-body" id="quiz-body"></div>
+    <div class="modal-foot" id="quiz-foot"></div>
+  </div>
+</div>
+
+<!-- CERTIFICATE -->
+<div id="cert-modal" class="modal">
+  <div class="modal-card" style="max-width:440px;">
+    <div class="modal-head">
+      <h3>🏆 Completion Certificate</h3>
+      <button class="modal-close" onclick="closeCert()">✕</button>
+    </div>
+    <div class="modal-body" id="cert-body"></div>
+    <div class="modal-foot">
+      <button class="btn btn-secondary" onclick="closeCert()">Close</button>
+      <button class="btn btn-primary" onclick="printCert()">📄 Print / Save PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- Print-only cert -->
+<div id="print-cert"></div>
+
+<script>
+/* ════════════════════════════════════════════════════════════════
+   APPLY CLUB CONFIG → CSS VARS + DOM SWAPS
+═══════════════════════════════════════════════════════════════════ */
+(function applyConfig(){
+  const root = document.documentElement.style;
+  root.setProperty('--primary',    CLUB_CONFIG.primary);
+  root.setProperty('--primary-d',  CLUB_CONFIG.primaryD);
+  root.setProperty('--primary-l',  CLUB_CONFIG.primaryL);
+  root.setProperty('--accent',     CLUB_CONFIG.accent);
+  root.setProperty('--accent-l',   CLUB_CONFIG.accentL);
+  root.setProperty('--on-primary', CLUB_CONFIG.textOnPrimary);
+  document.querySelector('meta[name=theme-color]').setAttribute('content', CLUB_CONFIG.primary);
+
+  // Favicon. Each club variant gets its own crest as the browser tab icon.
+  let fav = document.querySelector('link[rel="icon"]');
+  if (!fav) {
+    fav = document.createElement('link');
+    fav.rel = 'icon';
+    fav.type = 'image/png';
+    document.head.appendChild(fav);
+  }
+  fav.href = CLUB_CONFIG.logo;
+
+  // Splash
+  document.getElementById('splash-crest').src = CLUB_CONFIG.logo;
+  document.getElementById('splash-title').textContent = CLUB_CONFIG.name.toUpperCase();
+  document.getElementById('splash-sub').textContent = CLUB_CONFIG.isCSA
+    ? "The referee respect, education, and recruitment program built by CSA for every Colorado club. Choose your role to begin."
+    : "The referee education and respect program from " + CLUB_CONFIG.short + ", powered by Colorado Soccer Association. Choose your role to begin.";
+  document.title = "CREST Team. " + CLUB_CONFIG.name;
+
+  // Picker
+  document.getElementById('picker-club-name').innerHTML = CLUB_CONFIG.short + '<small>CREST Team</small>';
+
+  // Audience header
+  document.getElementById('aud-club-logo').src = CLUB_CONFIG.logo;
+  document.getElementById('aud-club-text').innerHTML = CLUB_CONFIG.short + '<small>CREST Team</small>';
+})();
+
+/* ════════════════════════════════════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════════════════════════════════════ */
+function goSplash(){ show('splash'); }
+function goPicker(){ show('picker'); }
+function goAudience(aud){
+  const a = document.getElementById('audience');
+  a.setAttribute('data-aud', aud);
+  renderAudience(aud);
+  show('audience');
+  window.scrollTo(0,0);
+}
+function show(which){
+  ['splash','picker','audience'].forEach(id=>{
+    document.getElementById(id).classList.toggle('active', id===which);
+  });
+}
+
+function openRAP(){ document.getElementById('rap-modal').classList.add('active'); }
+function closeRAP(){ document.getElementById('rap-modal').classList.remove('active'); }
+
+/* ════════════════════════════════════════════════════════════════
+   CONTENT BANK. sections per audience
+   Each section: { id, title, sub, render: () => HTML string }
+═══════════════════════════════════════════════════════════════════ */
+const COMMON = {
+  // Condensed Laws. pulled from CREST Reference Library and trimmed for Team audience
+  condensedLaws: `
+    <h3>Law 1 · The Field & Law 2 · The Ball</h3>
+    <ul>
+      <li>The longer lines are <strong>touch lines</strong>. The shorter lines are <strong>goal lines</strong>.</li>
+      <li>Penalty mark is <strong>12 yards</strong> from the goal line. Penalty area extends <strong>18 yards</strong>.</li>
+      <li><strong>Size 3</strong> ball: U6 to U8. <strong>Size 4</strong>: U9 to U12. <strong>Size 5</strong>: U13 and up.</li>
+    </ul>
+
+    <h3>Law 3 · The Players</h3>
+    <ul>
+      <li>A match is played by two teams, <strong>max 11 players each</strong> including a goalkeeper.</li>
+      <li>A match may not start with fewer than <strong>7 players</strong> on a team.</li>
+      <li>Up to <strong>5 substitutions</strong> in 3 opportunities during competitive matches. Sent-off players cannot be replaced.</li>
+    </ul>
+
+    <h3>Law 4 · Players' Equipment</h3>
+    <ul>
+      <li>Required: jersey with number, shorts, socks <strong>covering shin guards</strong>, shin guards, footwear.</li>
+      <li><strong>All jewelry must be removed.</strong> Tape over earrings is not permitted.</li>
+      <li>Goalkeeper must wear colors that distinguish them from both teams and the referee.</li>
+    </ul>
+
+    <h3>Law 5 · The Referee</h3>
+    <ul>
+      <li>The referee has <strong>full authority</strong> to enforce the Laws of the Game.</li>
+      <li>Decisions on facts are <strong>final</strong>. The referee may not change a decision after play has restarted.</li>
+      <li>The referee may allow play to continue (<strong>advantage</strong>) when an offense occurs and the non-offending team will benefit.</li>
+    </ul>
+
+    <h3>Law 7 · Duration</h3>
+    <ul>
+      <li>Two equal halves. Length may be reduced by competition rules (e.g. U10 plays shorter halves).</li>
+      <li><strong>Added time</strong> covers substitutions, injuries, goal celebrations, disciplinary actions, time-wasting.</li>
+      <li>The referee may add time to added time if further stoppages occur.</li>
+    </ul>
+
+    <h3>Law 9 · Ball In and Out of Play</h3>
+    <div class="callout info">
+      <span class="ico">💡</span>
+      <span>The ball must <em>wholly</em> cross the line to be out of play. If any part is still on or above the line, it is still in play.</span>
+    </div>
+
+    <h3>Law 11 · Offside</h3>
+    <p>A player is in an <strong>offside position</strong> if any part of the head, body, or feet is nearer to the opponents' goal line than both the ball and the second-to-last opponent.</p>
+    <div class="callout info">
+      <span class="ico">💡</span>
+      <span><strong>Being in an offside position is NOT an offense.</strong> A player is only penalized when they become involved in active play: touching the ball, blocking an opponent, or gaining an advantage.</span>
+    </div>
+    <ul>
+      <li>No offside in your own half.</li>
+      <li>No offside directly from a goal kick, throw-in, or corner kick.</li>
+    </ul>
+
+    <h3>Law 12 · Fouls & Misconduct</h3>
+    <p><strong>Direct free kick (DFK)</strong> offenses: kicking, tripping, jumping at, charging, striking, pushing, tackling, holding, spitting, handling.</p>
+    <div class="callout warn">
+      <span class="ico">⚠</span>
+      <span>Any DFK offense inside the offender's own penalty area = <strong>penalty kick</strong>.</span>
+    </div>
+    <p><strong>Yellow card</strong> (caution): unsporting behaviour, dissent, persistent infringement, delaying restart, encroachment, entering/leaving without permission, simulation.</p>
+    <p><strong>Red card</strong> (send-off): serious foul play, violent conduct, spitting at a person, DOGSO (denying an obvious goal-scoring opportunity), two cautions in same match, offensive/insulting/abusive language or gestures.</p>
+
+    <h3>Laws 13–17 · Restarts</h3>
+    <ul>
+      <li><strong>Free kicks:</strong> defending team 10 yards from the ball. DFK can score directly; IFK requires a second touch.</li>
+      <li><strong>Penalty kick:</strong> 12 yards. GK on goal line. All other players outside the box.</li>
+      <li><strong>Throw-in:</strong> both feet on or behind the touch line, ball released from behind and over the head with both hands.</li>
+      <li><strong>Goal kick / Corner kick:</strong> opposing team 10 yards away.</li>
+    </ul>
+
+    <div class="callout gold">
+      <span class="ico">📚</span>
+      <span>Want the full IFAB Laws? Open the <a href="https://coloradoreferee.github.io/" style="color:var(--accent-l);text-decoration:underline;" target="_blank">CREST Reference Library</a>.</span>
+    </div>
+  `,
+
+  greenBadge: `
+    <h3>Spot the Green Badge</h3>
+    <p>The U.S. Soccer referee badge is normally <strong>black</strong>. Referees <strong>under 18</strong> wear a <strong>green badge</strong> instead. It is on the chest of the jersey and impossible to miss once you know to look.</p>
+    <div class="callout warn">
+      <span class="ico">🟢</span>
+      <span>If you see a green badge, you are looking at a <strong>minor official</strong>. Under CSA and U.S. Soccer policy, abuse of a youth referee carries <strong>increased penalties</strong>.</span>
+    </div>
+    <h3>Why It Matters</h3>
+    <ul>
+      <li>That referee may be 13 to 17 years old. Often it is their first season.</li>
+      <li>Yelling, intimidation, or running onto the field at a green badge ref is treated more seriously than at an adult ref.</li>
+      <li>The crew, the assignor, and CSA all have a duty to protect them.</li>
+      <li>The fastest way to keep new referees in the game is to make sure the first season is not a hostile one.</li>
+    </ul>
+    <p>If you see a young ref being mistreated, <strong>step in or report it</strong>. RAP exists for exactly this.</p>
+  `,
+
+  whatsNew: `
+    <h3>What Changed for 2025/26</h3>
+    <p>The Reference Library carries the full updated text from IFAB. The headline items to know:</p>
+    <ul>
+      <li><em>Coach</em>: Continue to monitor official CSA communications for any local rules-of-competition changes.</li>
+      <li><em>Coach</em>: This is a placeholder section. CSA will populate with the 2025/26 official summary before the season opens.</li>
+      <li><em>Coach</em>: Tap below to read the full current Laws.</li>
+    </ul>
+    <div class="callout info">
+      <span class="ico">📖</span>
+      <span>Full Laws: <a href="https://coloradoreferee.github.io/" target="_blank" style="color:var(--accent-l);text-decoration:underline;">CREST Reference Library</a> · <a href="https://theifab.com/" target="_blank" style="color:var(--accent-l);text-decoration:underline;">theifab.com</a></span>
+    </div>
+  `,
+};
+
+const CONTENT = {
+  coach: {
+    label: "Coach",
+    icon: "⚽",
+    color: "var(--aud-coach)",
+    tagline: "Your CREST briefing for the season",
+    sections: [
+      { id:"welcome", title:"Welcome", short:"Welcome", render: () => `
+        <p>This is your CREST Team briefing as a coach. Six minutes here saves you problems on the touchline all season.</p>
+        <p>Inside you will find a <strong>condensed run of the Laws of the Game</strong>, the <strong>law changes for 2025/26</strong>, how to <strong>talk to referees so they hear you</strong>, what gets you <strong>carded or sent off</strong>, and how to <strong>spot a green badge ref</strong> and protect them.</p>
+        <div class="callout gold">
+          <span class="ico">🏆</span>
+          <span>Take the Coach's quiz at the bottom and earn a CREST completion certificate to share with your club director.</span>
+        </div>
+      `},
+
+      { id:"laws", title:"Condensed Laws", short:"Laws", render: () => COMMON.condensedLaws },
+
+      { id:"changes", title:"Law Changes 2025/26", short:"What's New", render: () => COMMON.whatsNew },
+
+      { id:"talk", title:"How to Talk to Refs", short:"Talk to Refs", render: () => `
+        <h3>The Three Rules of Touchline Communication</h3>
+        <ol style="padding-left:18px;color:rgba(255,255,255,.85);font-size:13.5px;line-height:1.7;">
+          <li><strong>Ask, don't yell.</strong> A clean question gets a clean answer. A scream gets a card.</li>
+          <li><strong>Use the right window.</strong> Halftime and the walk-off are real conversations. Mid-play is not.</li>
+          <li><strong>Pick one voice.</strong> Players coach themselves on the field. Parents are not the coach. You are.</li>
+        </ol>
+
+        <h3>What Works</h3>
+        <ul class="" >
+          <li class="chk">"Ref, can I get a clock check?"</li>
+          <li class="chk">"Crew, that one looked from out of bounds to me. What did you see?"</li>
+          <li class="chk">A nod. A thumbs up. A "thank you" after a hard call your way.</li>
+          <li class="chk">A handshake and "good crew" at the walk-off, even on a loss.</li>
+        </ul>
+
+        <h3>What Does Not</h3>
+        <ul>
+          <li class="x">"Are you BLIND?" / "Open your eyes" / "Watch the game"</li>
+          <li class="x">Running onto the field without being called.</li>
+          <li class="x">Demonstrating a call you wanted by acting it out on the touchline.</li>
+          <li class="x">Anything personal. Anything that questions integrity. Anything aimed at a green badge.</li>
+        </ul>
+
+        <div class="callout info">
+          <span class="ico">💡</span>
+          <span>The referee can <strong>caution or send off a coach</strong> at any time. From the moment they walk to the field until they walk back to their car, they retain jurisdiction.</span>
+        </div>
+      `},
+
+      { id:"carded", title:"What Gets You Carded", short:"Carded", render: () => `
+        <h3>Cautions for Team Officials (Yellow)</h3>
+        <ul>
+          <li>Entering the field of play in a respectful, non-confrontational way</li>
+          <li>Failing to cooperate with a match official</li>
+          <li>Dissent by word or action (gestures included)</li>
+          <li>Persistently or aggressively criticising a decision</li>
+          <li>Delaying the restart of play by the team</li>
+          <li>Acting in a provocative or inflammatory way</li>
+        </ul>
+
+        <h3>Send-Offs for Team Officials (Red)</h3>
+        <ul>
+          <li>Entering the field to confront a match official, including at halftime or full time</li>
+          <li>Entering the opposing technical area in an aggressive or confrontational way</li>
+          <li>Deliberately throwing or kicking an object onto the field</li>
+          <li>Violent conduct</li>
+          <li>Spitting at any person</li>
+          <li>Using offensive, insulting, or abusive language or gestures</li>
+          <li>Receiving a second caution in the same match</li>
+        </ul>
+
+        <div class="callout alert">
+          <span class="ico">🟥</span>
+          <span>A coach sent off must leave the field <strong>and its immediate surroundings</strong>. Stay near the bench, you are subject to further reporting.</span>
+        </div>
+      `},
+
+      { id:"greenbadge", title:"Green Badge Refs", short:"Green Badge", render: () => COMMON.greenBadge },
+
+      { id:"rap", title:"RAP Reporting", short:"RAP", render: () => `
+        <h3>Referee Abuse Prevention</h3>
+        <p>U.S. Soccer Policy 531-9 applies to every sanctioned match in Colorado. As a coach, you are <strong>responsible for your bench, your players, and the spectators on your side of the field</strong>.</p>
+
+        <h3>When to File a Report</h3>
+        <ul>
+          <li>You witness physical contact with a referee.</li>
+          <li>You hear sustained verbal abuse aimed at the crew.</li>
+          <li>A spectator from either side runs the touchline at the crew.</li>
+          <li>Your own players or assistants cross the line.</li>
+        </ul>
+        <div class="callout alert">
+          <span class="ico">⚠</span>
+          <span>It is better to file and have it reviewed than to wait. The crew may already be filing. Your report supports theirs.</span>
+        </div>
+        <h3>How to Report</h3>
+        <ul>
+          <li><strong>Email:</strong> rapreporting@coloradoreferees.com</li>
+          <li><strong>Phone:</strong> 303.529.7718</li>
+          <li><strong>911</strong> first if anyone is in physical danger.</li>
+        </ul>
+        <button class="btn btn-danger" onclick="openRAP()" style="margin-top:10px;">🛑 Open RAP Quick-Report</button>
+      `},
+
+      { id:"conduct", title:"Code of Conduct", short:"Conduct", render: () => `
+        <h3>The CSA Coach Code</h3>
+        <p>By stepping onto a Colorado field, you agree to:</p>
+        <ul class="">
+          <li class="chk"><strong>Respect every official</strong>, regardless of grade or age. The green badge in particular.</li>
+          <li class="chk"><strong>Lead your bench.</strong> Your players follow your example, not your words.</li>
+          <li class="chk"><strong>Own the sideline behind you.</strong> Parents who scream at refs are reflecting on you.</li>
+          <li class="chk"><strong>Teach the game inside the Laws.</strong> Yelling at a correct call teaches the wrong lesson.</li>
+          <li class="chk"><strong>Welcome the crew.</strong> Walk over before kickoff, introduce yourself, shake hands.</li>
+          <li class="chk"><strong>Walk off the same way</strong>, regardless of result.</li>
+        </ul>
+        <div class="callout good">
+          <span class="ico">⚽</span>
+          <span><strong>For the love of the game.</strong> CREST exists because Colorado wants every match officiated, every season, by people who are still excited to be here.</span>
+        </div>
+      `},
+
+      { id:"coaching", title:"From CSA Coaching", short:"Coaching Preview", render: () => `
+        <p>CSA Coaching is building education modules to live inside this app. Here is a sneak peek.</p>
+
+        <div class="sneak-peek">
+          <span class="sp-label">Sample · CSA Coaching</span>
+          <h4>1v1 Defending · The Three Decisions</h4>
+          <p>Before you challenge, you decide: <strong>delay, contain, or commit</strong>. Read the attacker's hips, not the ball. Show them where you want them to go. Win the second touch, not the first.</p>
+          <span class="sp-tag">U10 to U14</span>
+          <span class="sp-tag">Defending Principles</span>
+          <span class="sp-tag">~10 min session</span>
+        </div>
+
+        <div class="sneak-peek">
+          <span class="sp-label">Sample · CSA Coaching</span>
+          <h4>Set Piece Organisation · Defensive Corners</h4>
+          <p>Two zonal markers on the posts. The rest go man. Tallest in the six, fastest on the edge of the box. Communicate before the kick, not after.</p>
+          <span class="sp-tag">U12+</span>
+          <span class="sp-tag">Set Pieces</span>
+        </div>
+
+        <div class="callout info">
+          <span class="ico">📍</span>
+          <span><strong>Full curriculum coming this season.</strong> CSA Coaching will populate this tab with structured sessions, video, and progressions for every age group.</span>
+        </div>
+      `},
+
+      { id:"quiz", title:"The Coach's Refresher", short:"Quiz", render: () => quizLaunchHTML('coach') },
+    ]
+  },
+
+  player: {
+    label: "Player",
+    icon: "🏃",
+    color: "var(--aud-player)",
+    tagline: "Know the laws. Get paid. Stay in the game you love.",
+    sections: [
+      { id:"welcome", title:"Welcome", short:"Welcome", render: () => `
+        <p>This app does two things for you. It helps you <strong>understand the Laws</strong> so you stop guessing about offside, and it shows you a path to <strong>earn money refereeing</strong> when you are not playing.</p>
+        <div class="callout good">
+          <span class="ico">💵</span>
+          <span>A 13-year-old who certifies through CREST can earn <strong>$25–60 per game</strong> as a referee or assistant in Colorado. Two games on a Saturday = a paycheck.</span>
+        </div>
+        <p>Hit the laws first. Take the quiz. Then look at the referee path.</p>
+      `},
+
+      { id:"laws", title:"Condensed Laws", short:"Laws", render: () => COMMON.condensedLaws },
+
+      { id:"become", title:"Become a Referee", short:"Become a Ref", render: () => `
+        <div class="recruit-card">
+          <h3>You can ref. Starting at 13.</h3>
+          <p>The Grassroots course is open to anyone <strong>13 and older</strong>. CREST runs the in-school version free for your club. You finish the course, you get your badge, you start working.</p>
+          <div class="pay-row">
+            <span class="pay-pill"><strong>$25–60</strong> per game</span>
+            <span class="pay-pill"><strong>2–4 games</strong> per weekend</span>
+            <span class="pay-pill"><strong>You set</strong> your schedule</span>
+          </div>
+          <a class="cta" href="mailto:dduncanallen@coloradoreferees.com?subject=Interested%20in%20becoming%20a%20referee">Talk to CSA →</a>
+        </div>
+
+        <h3>The Pathway</h3>
+        <ul>
+          <li><strong>Grassroots Referee</strong>. The entry level. CREST in-school course or U.S. Soccer Learning Center online.</li>
+          <li><strong>Regional Referee</strong>. Additional training and assessments. You start working older, more competitive games.</li>
+          <li><strong>National Referee</strong>. The top tier. Years of work, but a real path.</li>
+        </ul>
+
+        <h3>What You Need</h3>
+        <ul class="">
+          <li class="chk">Be at least 13 years old</li>
+          <li class="chk">Complete the Grassroots course (online + field training)</li>
+          <li class="chk">Parent or guardian signs the safety documents if you are under 18</li>
+          <li class="chk">A uniform (yellow jersey, black shorts, ref socks, whistle, cards). About $100 to start</li>
+          <li class="chk">An Assignr account so games come to you</li>
+        </ul>
+
+        <div class="callout gold">
+          <span class="ico">🟢</span>
+          <span>Until you turn 18, you wear the <strong>Green Badge</strong>. CSA, assignors, and crews look out for you. Coaches and parents who abuse you face heavier penalties.</span>
+        </div>
+      `},
+
+      { id:"changes", title:"What's New 2025/26", short:"What's New", render: () => COMMON.whatsNew },
+
+      { id:"greenbadge", title:"The Green Badge", short:"Green Badge", render: () => `
+        <h3>If you ref, this is your badge.</h3>
+        <p>The U.S. Soccer referee badge is normally <strong>black</strong>. Until you turn 18, yours is <strong>green</strong>. It sits on the front of your jersey.</p>
+
+        <h3>What That Means for You</h3>
+        <ul class="">
+          <li class="chk"><strong>You are protected differently.</strong> Abuse of a green badge carries higher penalties.</li>
+          <li class="chk"><strong>You are never alone.</strong> Your crew, your assignor, and CSA have your back.</li>
+          <li class="chk"><strong>You set the safety standard.</strong> Never meet a mentor alone. Always leave the field as a crew.</li>
+          <li class="chk"><strong>You are still a referee.</strong> The badge color does not change your authority on the field.</li>
+        </ul>
+
+        <div class="callout alert">
+          <span class="ico">⚠</span>
+          <span>If anyone (a mentor, a coach, a parent) does something that feels wrong, tell your assignor or Deanna at CSA immediately: <strong>303.888.6863</strong>.</span>
+        </div>
+      `},
+
+      { id:"conduct", title:"Code of Conduct", short:"Conduct", render: () => `
+        <h3>The CSA Player Code</h3>
+        <p>On the field:</p>
+        <ul class="">
+          <li class="chk"><strong>Play the whistle.</strong> If you disagree, talk after.</li>
+          <li class="chk"><strong>No dissent.</strong> Captains can ask. The rest of the team plays on.</li>
+          <li class="chk"><strong>Respect your opponent.</strong> No shoves after the play. No words about anyone's family or anything else off limits.</li>
+          <li class="chk"><strong>Help up the player you tackled.</strong> Even in the rivalry game.</li>
+          <li class="chk"><strong>Shake hands at the walk-off.</strong> Crew included.</li>
+        </ul>
+
+        <h3>Off the Field</h3>
+        <ul class="">
+          <li class="chk">Represent your club the same way you play.</li>
+          <li class="chk">Watch how you talk about other clubs and other refs online.</li>
+          <li class="chk">If you ref, you live by the referee Code too. Same standards, all the time.</li>
+        </ul>
+      `},
+
+      { id:"rap", title:"RAP Protects You Too", short:"RAP", render: () => `
+        <h3>Your Protection on the Field</h3>
+        <p>RAP is not only about protecting referees. It protects <strong>you</strong>. If a coach, parent, or opponent crosses a line that no one should cross, the same policy applies.</p>
+        <ul>
+          <li>Physical contact from an adult that should not have happened.</li>
+          <li>Verbal abuse or threats from the touchline.</li>
+          <li>Anything that feels wrong from a mentor or coach off the field.</li>
+        </ul>
+        <p>You can report directly, or tell your coach, parent, or assignor and let them help.</p>
+        <button class="btn btn-danger" onclick="openRAP()" style="margin-top:6px;">🛑 Open RAP Quick-Report</button>
+      `},
+
+      { id:"contact", title:"Talk to a Coach", short:"Contact", render: () => `
+        <h3>Want to Become a Ref? Want to Get Better at the Game?</h3>
+        <p>The CREST program has real people behind it. Reach out.</p>
+        <ul>
+          <li><strong>CSA Referee Operations</strong>. Deanna Duncan-Allen<br><a style="color:var(--accent-l);text-decoration:underline;" href="mailto:dduncanallen@coloradoreferees.com">dduncanallen@coloradoreferees.com</a></li>
+          <li><strong>CREST Academy / Referee Education</strong>. <a style="color:var(--accent-l);text-decoration:underline;" href="mailto:refeducation@coloradoreferees.com">refeducation@coloradoreferees.com</a></li>
+          <li><strong>CREST Reference Library</strong>. Full Laws, Game Day, all of it: <a style="color:var(--accent-l);text-decoration:underline;" href="https://coloradoreferee.github.io/" target="_blank">coloradoreferee.github.io</a></li>
+        </ul>
+      `},
+
+      { id:"quiz", title:"Player's Quiz", short:"Quiz", render: () => quizLaunchHTML('player') },
+    ]
+  },
+
+  parent: {
+    label: "Parent",
+    icon: "👨‍👩‍👧",
+    color: "var(--aud-parent)",
+    tagline: "What you need to know from the sideline this season",
+    sections: [
+      { id:"welcome", title:"Welcome", short:"Welcome", render: () => `
+        <p>You are the most important adult on your kid's sideline. This app exists to make sure you know <strong>what the rules actually are</strong>, <strong>what behavior keeps your kid playing</strong>, and <strong>how to protect every referee on that field</strong>. Including the one who might be your kid one day.</p>
+        <div class="callout gold">
+          <span class="ico">🟢</span>
+          <span>Pay particular attention to the <strong>Green Badge</strong> section. If you see one on the field, that referee is under 18. The rules for how we treat them are stricter, and they should be.</span>
+        </div>
+      `},
+
+      { id:"sideline", title:"The Sideline", short:"Sideline", render: () => `
+        <h3>The Three-Foot Rule</h3>
+        <p>Stay <strong>three feet back from the touchline</strong>. The AR runs that line. The crew needs the lane.</p>
+
+        <h3>What Helps Your Kid</h3>
+        <ul class="">
+          <li class="chk">Cheer loud. Cheer for both teams.</li>
+          <li class="chk">"Nice run" beats "go to goal". The players are coaching themselves out there.</li>
+          <li class="chk">Trust the coach. There is one of them on the field at a time, and it is not you.</li>
+          <li class="chk">Read the moment. If your kid just made a mistake, silence is a gift.</li>
+        </ul>
+
+        <h3>What Gets You Removed</h3>
+        <ul>
+          <li class="x">Yelling at the referee. Especially a green badge.</li>
+          <li class="x">Yelling at the opposing parents.</li>
+          <li class="x">Walking onto the field for any reason that is not medical.</li>
+          <li class="x">Coaching from the sideline when the coach is right there.</li>
+          <li class="x">Anything personal: family, weight, accent, gender, race, age, the badge they wear.</li>
+        </ul>
+
+        <div class="callout alert">
+          <span class="ico">⚠</span>
+          <span>The referee can <strong>have you removed from the field</strong>. They can also have your child's match abandoned and reported. That ends in suspensions for the coach and the club.</span>
+        </div>
+      `},
+
+      { id:"laws", title:"Laws You'll See", short:"Laws", render: () => COMMON.condensedLaws },
+
+      { id:"greenbadge", title:"The Green Badge", short:"Green Badge", render: () => COMMON.greenBadge + `
+        <h3>If you ever see a parent or coach abuse a green badge ref</h3>
+        <p>Say something. Or report it through RAP. CSA wants to know. Other parents wonder if they should. Be the one who does.</p>
+        <button class="btn btn-danger" onclick="openRAP()" style="margin-top:6px;">🛑 Open RAP Quick-Report</button>
+      `},
+
+      { id:"rap", title:"RAP & Your Kid", short:"RAP", render: () => `
+        <h3>Referee Abuse Prevention</h3>
+        <p>U.S. Soccer Policy 531-9 protects every referee at every sanctioned match in Colorado. Including the one your kid might become.</p>
+        <p>If you see abuse of a referee. By a coach, a parent, a spectator, anyone. You can report it. The report becomes part of CSA's record. Patterns get caught. Suspensions happen.</p>
+        <ul>
+          <li><strong>Email:</strong> rapreporting@coloradoreferees.com</li>
+          <li><strong>Phone:</strong> 303.529.7718</li>
+          <li><strong>911 first</strong> if anyone is in physical danger.</li>
+        </ul>
+
+        <h3>If your child is a referee</h3>
+        <p>The Reference Library has a full <em>Parents of Youth Referees</em> section: account setup, safety rules, how to support without crossing into the crew's job. Read it before their first match.</p>
+        <a class="btn btn-secondary" href="https://coloradoreferee.github.io/" target="_blank" style="display:inline-block;text-decoration:none;margin-top:6px;">Open CREST Reference Library →</a>
+      `},
+
+      { id:"become", title:"Could Your Kid Ref?", short:"Become a Ref", render: () => `
+        <div class="recruit-card">
+          <h3>13 and up. Real money. Real skills.</h3>
+          <p>If your child is at least 13, they can become a U.S. Soccer licensed referee through CREST. The course is in-school or online. The badge arrives in the mail. They start working games on weekends.</p>
+          <div class="pay-row">
+            <span class="pay-pill"><strong>$25–60</strong> per game</span>
+            <span class="pay-pill"><strong>2–4 games</strong> per weekend</span>
+            <span class="pay-pill"><strong>Confidence, conflict, communication</strong>. Real life skills</span>
+          </div>
+          <a class="cta" href="mailto:dduncanallen@coloradoreferees.com?subject=Interested%20in%20my%20child%20becoming%20a%20referee">Email CSA →</a>
+        </div>
+
+        <h3>The Parent Role</h3>
+        <ul class="">
+          <li class="chk">If they are under 18, you are involved. Account, transportation, safety.</li>
+          <li class="chk">Read the CREST Reference Library <em>Parents</em> section before their first game.</li>
+          <li class="chk">Stay at the field when they work, or make sure they can reach you.</li>
+          <li class="chk">Consider getting certified yourself. Many parents do.</li>
+        </ul>
+      `},
+
+      { id:"changes", title:"What's New 2025/26", short:"What's New", render: () => COMMON.whatsNew },
+
+      { id:"conduct", title:"Parent Code", short:"Conduct", render: () => `
+        <h3>The CSA Parent Code</h3>
+        <p>By being on the touchline at a Colorado match you agree to:</p>
+        <ul class="">
+          <li class="chk">Cheer positively. For everyone. Even the kids on the other team.</li>
+          <li class="chk">Respect the referee. Always. The green badge especially.</li>
+          <li class="chk">Stay three feet back from the touchline.</li>
+          <li class="chk">Leave coaching to the coach.</li>
+          <li class="chk">Walk away rather than say the thing you will regret.</li>
+          <li class="chk">If something crosses the line, file a RAP report. Not a confrontation.</li>
+        </ul>
+        <div class="callout good">
+          <span class="ico">⚽</span>
+          <span><strong>For the love of the game.</strong> CREST exists because we want every kid playing in Colorado to have a referee in the middle, every weekend. That happens because parents like you keep the touchline a place people want to come back to.</span>
+        </div>
+      `},
+
+      { id:"quiz", title:"Parent's Quiz", short:"Quiz", render: () => quizLaunchHTML('parent') },
+    ]
+  }
+};
+
+function quizLaunchHTML(aud){
+  const status = quizStatus(aud);
+  const cls = status.passed ? "quiz-launch completed" : "quiz-launch";
+  const btnText = status.passed ? "VIEW CERT" : (status.attempted ? "TRY AGAIN" : "START QUIZ");
+  const subText = status.passed
+    ? "You passed. Tap the button to view or reprint your certificate."
+    : "10 questions. 8 right = pass. Wrong answers come with an explanation. No time limit.";
+  const onclick = status.passed ? `viewCert('${aud}')` : `startQuiz('${aud}')`;
+  return `
+    <div class="${cls}">
+      <div class="ql-text">
+        <h4>${CONTENT[aud].label}'s Quiz</h4>
+        <p>${subText}</p>
+      </div>
+      <button onclick="${onclick}">${btnText}</button>
+    </div>
+    ${status.passed ? `<p style="font-size:12px;color:rgba(255,255,255,.5);margin-top:8px;">Completed by <strong style="color:var(--accent-l);">${escapeHTML(status.name)}</strong> on ${status.date}. Score: <strong style="color:var(--grn);">${status.score}/10</strong>.</p>` : ""}
+  `;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   AUDIENCE RENDERING
+═══════════════════════════════════════════════════════════════════ */
+function renderAudience(aud){
+  const cfg = CONTENT[aud];
+  const banner = document.querySelector('.aud-banner');
+  document.getElementById('aud-banner-icon').textContent = cfg.icon;
+  document.getElementById('aud-banner-title').textContent = cfg.label.toUpperCase();
+  document.getElementById('aud-banner-sub').textContent = cfg.tagline;
+
+  // Section nav
+  const nav = document.getElementById('section-nav');
+  nav.innerHTML = cfg.sections.map((s, i) => `
+    <button class="sec-pill${i===0?' active':''}" data-sec="${s.id}" onclick="selectSection('${aud}','${s.id}')">${s.short}</button>
+  `).join('');
+
+  // Content blocks (all rendered, only active shown)
+  const main = document.getElementById('aud-main');
+  main.innerHTML = cfg.sections.map((s, i) => `
+    <article class="block${i===0?' active':''}" data-sec="${s.id}">
+      <div class="eyebrow">${cfg.label.toUpperCase()} · ${s.short.toUpperCase()}</div>
+      <h2>${s.title}</h2>
+      ${s.render()}
+    </article>
+  `).join('');
+}
+
+function selectSection(aud, secId){
+  document.querySelectorAll('#section-nav .sec-pill').forEach(p=>{
+    p.classList.toggle('active', p.dataset.sec===secId);
+    if(p.dataset.sec===secId) p.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+  });
+  document.querySelectorAll('.aud-main .block').forEach(b=>{
+    b.classList.toggle('active', b.dataset.sec===secId);
+  });
+  document.getElementById('aud-main').scrollTo({top:0, behavior:'smooth'});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ════════════════════════════════════════════════════════════════
+   QUIZ ENGINE
+═══════════════════════════════════════════════════════════════════ */
+const QUIZ_BANK = {
+  coach: [
+    { q: "A coach disagrees with a yellow card and runs onto the field to confront the referee at halftime. What is the correct outcome?",
+      opts: [
+        "A caution (yellow card) for entering the field",
+        "A send-off (red card) for confronting a match official",
+        "Nothing. The referee has no jurisdiction at halftime",
+        "A verbal warning if it is the first incident"
+      ],
+      correct: 1,
+      why: "Per Law 12 misconduct rules for team officials, <strong>entering the field of play to confront a match official</strong>. Including at halftime. Is a send-off offense. The referee retains jurisdiction from arrival until departure from the field area." },
+
+    { q: "A player on Team A is in an offside position when their teammate plays the ball. The Team A player does not touch the ball, but a defender from Team B is forced to step toward them. What is the call?",
+      opts: [
+        "Not offside. The player did not touch the ball",
+        "Offside. Interfering with an opponent",
+        "Play on, no foul",
+        "Indirect free kick for Team B for impeding"
+      ],
+      correct: 1,
+      why: "Law 11 defines offside as becoming involved in active play, which includes <strong>interfering with an opponent</strong> by preventing them from playing the ball. The defender being forced to react makes this offside." },
+
+    { q: "Your goalkeeper picks up a back-pass kicked deliberately by a teammate. The correct restart is:",
+      opts: [
+        "Indirect free kick to the opposing team from where the GK handled the ball",
+        "Direct free kick from the edge of the penalty area",
+        "Penalty kick",
+        "Drop ball at the spot"
+      ],
+      correct: 0,
+      why: "Law 12 lists GK handling after a deliberate kick by a teammate as an <strong>indirect free kick</strong> offense, taken from where the GK touched the ball." },
+
+    { q: "How many substitutions are allowed in a competitive match under Law 3, and in how many opportunities?",
+      opts: [
+        "3 subs in 3 opportunities",
+        "Unlimited subs, no restriction",
+        "5 subs in 3 opportunities",
+        "5 subs in 5 opportunities"
+      ],
+      correct: 2,
+      why: "Law 3 sets <strong>5 substitutions per team in 3 opportunities</strong> for competitive matches. Half-time substitutions do not count against the 3 opportunities." },
+
+    { q: "A defender deliberately handles the ball outside the penalty area to stop the attacker breaking through on goal. What is the correct outcome?",
+      opts: [
+        "Direct free kick, yellow card",
+        "Direct free kick, red card (DOGSO)",
+        "Indirect free kick, no card",
+        "Penalty kick, yellow card"
+      ],
+      correct: 1,
+      why: "Denying an Obvious Goal-Scoring Opportunity (DOGSO) by handling outside the penalty area is a <strong>direct free kick and a red card</strong>. The 4 Ds: Distance, Direction, Defenders, Destiny." },
+
+    { q: "A spectator from your sideline yells at the green badge AR. As coach, what is your responsibility?",
+      opts: [
+        "It is not your problem. The referee will deal with it",
+        "Intervene immediately, ask them to stop, and report through RAP if it continues",
+        "Yell at the spectator yourself",
+        "Wait until halftime to address it"
+      ],
+      correct: 1,
+      why: "Coaches are responsible for spectators on their side of the field. <strong>Step in immediately, then file a RAP report</strong>. Green badge AR means a minor. Penalties are increased." },
+
+    { q: "The referee allows play to continue after a foul because your team has a clear attacking opportunity. This is called:",
+      opts: [
+        "Letting the game go",
+        "Advantage",
+        "Discretion",
+        "Continuation"
+      ],
+      correct: 1,
+      why: "Law 5 allows the referee to play <strong>advantage</strong> when the non-offending team will benefit from continuing. If the advantage does not develop within a few seconds, the referee can come back to the foul." },
+
+    { q: "Your captain is the only player who may speak with the referee:",
+      opts: [
+        "Always. Only captains can talk to refs",
+        "Captains have a defined role but any player can be cautioned for dissent",
+        "Only when the referee asks a question",
+        "Never. Players cannot speak to the referee"
+      ],
+      correct: 1,
+      why: "Captains have a defined liaison role and IFAB has reinforced this, but <strong>any player</strong> can be cautioned for dissent. Encourage your team to channel questions through the captain." },
+
+    { q: "What is the maximum permitted halftime interval?",
+      opts: ["10 minutes", "15 minutes", "20 minutes", "It varies by competition"],
+      correct: 1,
+      why: "Law 7 sets the maximum at <strong>15 minutes</strong>. Competition rules may shorten it." },
+
+    { q: "Which of the following is NOT a cautionable offense for a team official?",
+      opts: [
+        "Persistently arguing decisions",
+        "Failing to cooperate with a match official",
+        "Asking the referee a clarifying question politely",
+        "Delaying the team's restart of play"
+      ],
+      correct: 2,
+      why: "<strong>Asking politely</strong> is allowed and encouraged. The other three are explicit cautionable offenses under Law 12 misconduct for team officials." },
+  ],
+
+  player: [
+    { q: "You are standing in an offside position when your teammate plays the ball. You don't touch it and don't run at it. Are you offside?",
+      opts: [
+        "Yes. Being in an offside position is the offense",
+        "No. Being in an offside position is not an offense unless you become involved",
+        "Yes, but only if a defender sees you",
+        "Only if you are in the penalty area"
+      ],
+      correct: 1,
+      why: "Being in an offside position is <strong>not</strong> an offense by itself. You only get called when you become involved: touching the ball, blocking an opponent, or gaining an advantage from the position." },
+
+    { q: "You score directly from a throw-in. The goal is:",
+      opts: ["Allowed", "Disallowed. Restart with a goal kick", "Disallowed. Restart with a corner kick", "Allowed only on direct throws"],
+      correct: 1,
+      why: "A goal <strong>cannot</strong> be scored directly from a throw-in. If the ball goes into the opponents' goal directly, the restart is a goal kick. Into your own goal directly is a corner kick to the opposition." },
+
+    { q: "The minimum age to become a U.S. Soccer licensed referee is:",
+      opts: ["12", "13", "14", "16"],
+      correct: 1,
+      why: "The Grassroots license is open to anyone <strong>13 years of age and older</strong>. That is your earliest entry to paid officiating." },
+
+    { q: "You are an under-18 referee. Your badge color is:",
+      opts: ["Black", "Green", "Yellow", "Same as adults"],
+      correct: 1,
+      why: "Referees under 18 wear a <strong>green badge</strong>. It marks you as a minor official and triggers higher penalties for anyone who abuses you." },
+
+    { q: "Your GK picks up a deliberate back-pass from your foot. The restart is:",
+      opts: ["No call. Back-passes are legal", "Indirect free kick to the opponents", "Direct free kick to the opponents", "Drop ball"],
+      correct: 1,
+      why: "Law 12: GK handling a <strong>deliberate kick by a teammate</strong> is an indirect free kick offense. Use your chest, head, or thigh to pass back, not your foot. Unless you are sure the GK is not picking it up." },
+
+    { q: "How wide is a regulation full-size goal?",
+      opts: ["7 yards", "8 yards", "8 yards by 8 feet", "10 yards"],
+      correct: 2,
+      why: "Goals are <strong>8 yards (7.32m) wide and 8 feet (2.44m) tall</strong>. Same in every full-size match worldwide." },
+
+    { q: "You commit a holding offense in your own penalty area. The opponent gets:",
+      opts: ["Indirect free kick", "Penalty kick", "Direct free kick from the edge of the box", "Yellow card only, play on"],
+      correct: 1,
+      why: "Any of the 10 direct free kick offenses (kicking, tripping, holding, pushing, etc.) committed inside your own penalty area is a <strong>penalty kick</strong>." },
+
+    { q: "Maximum substitutions in a competitive match (Law 3):",
+      opts: ["3 in 3 opportunities", "5 in 3 opportunities", "5 in 5 opportunities", "Unlimited"],
+      correct: 1,
+      why: "<strong>5 substitutions in 3 opportunities</strong> for competitive matches. Knowing this matters when you are subbed out and might come back later." },
+
+    { q: "You receive your second caution (yellow) in the same match. What happens?",
+      opts: [
+        "Nothing. Yellows do not stack",
+        "Send-off (red card). You leave the field and your team plays a player down",
+        "You sit out for 5 minutes",
+        "The next sub takes your place but you can return"
+      ],
+      correct: 1,
+      why: "Two cautions in the same match = <strong>send-off</strong>. Your team plays the rest of the match a player down, and you cannot be replaced." },
+
+    { q: "If a CSA-licensed referee is being abused by a coach or parent, you can:",
+      opts: [
+        "Nothing. Players cannot report",
+        "Tell your coach or file a RAP report yourself",
+        "Argue with the abuser",
+        "Wait until next season"
+      ],
+      correct: 1,
+      why: "Players can absolutely report. Tell your coach, your parent, or file directly. RAP exists to <strong>protect referees of every age</strong>, and your voice counts." },
+  ],
+
+  parent: [
+    { q: "A referee with a green badge is officiating your child's match. The badge color means:",
+      opts: [
+        "Trainee referee. Not yet licensed",
+        "A referee under 18 years old. Penalties for abuse are increased",
+        "Volunteer parent referee",
+        "Senior referee with extra training"
+      ],
+      correct: 1,
+      why: "The <strong>green badge</strong> marks a minor official. Under 18. Abuse of a green badge carries higher penalties under U.S. Soccer Policy 531-9 and CSA rules." },
+
+    { q: "Your child's team is on offense. An opposing defender is the last player back. Your child runs onto a long ball from a teammate. They are offside only if:",
+      opts: [
+        "They were behind the defender when their teammate passed the ball",
+        "They were behind the goalkeeper",
+        "They were ahead of the second-to-last defender when the ball was played AND they become involved in active play",
+        "They touch the ball before any defender"
+      ],
+      correct: 2,
+      why: "Offside has two conditions: <strong>position</strong> (ahead of the second-to-last defender when the ball is played) AND <strong>involvement</strong> (touching the ball, blocking an opponent, or gaining advantage). Both must be true." },
+
+    { q: "A direct free kick is awarded against your child's team. What is the minimum distance the defending players must be from the ball?",
+      opts: ["5 yards", "8 yards", "10 yards", "12 yards"],
+      correct: 2,
+      why: "Defending players must be at least <strong>10 yards (9.15m)</strong> from the ball on a free kick, until it is in play." },
+
+    { q: "The proper sideline behavior is:",
+      opts: [
+        "Cheer for both teams, stay three feet back from the touchline, leave coaching to the coach",
+        "Coach loudly so your child can hear instructions",
+        "Stand on the goal line for the best view",
+        "Question every call the referee makes"
+      ],
+      correct: 0,
+      why: "Three feet back. Coach is the coach. Cheering is for both sides. The crew needs the touchline clear for the AR to run." },
+
+    { q: "You witness abuse of a referee at your child's match. You should:",
+      opts: [
+        "Confront the abuser yourself",
+        "Wait and see if it escalates",
+        "Report through RAP. Email rapreporting@coloradoreferees.com or call 303.529.7718",
+        "Tell your child to ignore it"
+      ],
+      correct: 2,
+      why: "Use the RAP channel. CSA records the incident, patterns get caught, suspensions happen. If anyone is in physical danger, <strong>call 911 first</strong>." },
+
+    { q: "Your child wants to become a referee. The minimum age is:",
+      opts: ["10", "12", "13", "16"],
+      correct: 2,
+      why: "<strong>13 years old</strong> for the Grassroots course. CREST runs free certification through participating schools and clubs in Colorado." },
+
+    { q: "A referee whistles for a foul against your child's team. As a parent on the sideline you should:",
+      opts: [
+        "Yell at the referee that it was a clean play",
+        "Quietly accept the call and let the game continue",
+        "Walk onto the field to ask for an explanation",
+        "Boo loudly"
+      ],
+      correct: 1,
+      why: "Quiet acceptance is the standard. Even if the call is wrong, the moment a parent escalates, the situation gets worse for the kids on the field. Including your own." },
+
+    { q: "Your child is a green badge referee and tells you their assignor wants to meet alone after a game to give feedback. You should:",
+      opts: [
+        "Agree, it is part of being a referee",
+        "Refuse. Minor referees should never meet alone with a mentor or assignor",
+        "Drop your child off and pick them up later",
+        "Tell your child to go alone but call you afterwards"
+      ],
+      correct: 1,
+      why: "<strong>Never alone.</strong> Minor referees should always have a parent present or meet in public, observable settings. If anyone insists otherwise, report it to CSA at 303.888.6863." },
+
+    { q: "What gets you removed from a sideline by the referee?",
+      opts: [
+        "Loud cheering",
+        "Disagreeing with a call quietly",
+        "Verbal abuse of the referee, entering the field, or aggression toward the opposing sideline",
+        "Wearing your child's team colors"
+      ],
+      correct: 2,
+      why: "Referees can have any spectator removed for abusive behavior. The match can be abandoned and reported, which leads to consequences for the coach and the club." },
+
+    { q: "The ball is partially on the touch line but not entirely over it. The correct call is:",
+      opts: ["Out of play. Throw-in", "Still in play", "Drop ball", "Indirect free kick"],
+      correct: 1,
+      why: "The ball is only out of play when it has <strong>wholly</strong> crossed the line. Any part still on or above the line = still in play. This applies to goal lines too." },
+  ]
+};
+
+let QUIZ_STATE = null;
+
+function startQuiz(aud){
+  // Get name first if we don't have one for this audience
+  const stored = JSON.parse(localStorage.getItem('crestTeamUser') || '{}');
+  const lastName = stored.name || '';
+
+  QUIZ_STATE = {
+    aud,
+    questions: shuffle([...QUIZ_BANK[aud]]).slice(0, 10),
+    index: 0,
+    score: 0,
+    name: lastName,
+    awaitingName: !lastName,
+    answered: false,
+  };
+
+  document.getElementById('quiz-modal').classList.add('active');
+  renderQuiz();
+}
+
+function renderQuiz(){
+  const body = document.getElementById('quiz-body');
+  const foot = document.getElementById('quiz-foot');
+  document.getElementById('quiz-title').textContent = CONTENT[QUIZ_STATE.aud].label + "'s Quiz";
+
+  if(QUIZ_STATE.awaitingName){
+    body.innerHTML = `
+      <div class="quiz-name">
+        <p style="font-size:14px;color:rgba(255,255,255,.8);">First, what's your name? This goes on your completion certificate.</p>
+        <input type="text" id="quiz-name-input" placeholder="Your name" maxlength="40" value="${escapeHTML(QUIZ_STATE.name)}">
+      </div>
+    `;
+    foot.innerHTML = `
+      <button class="btn btn-secondary" onclick="closeQuiz()">Cancel</button>
+      <button class="btn btn-primary" onclick="submitName()">Start Quiz →</button>
+    `;
+    setTimeout(()=>document.getElementById('quiz-name-input').focus(), 50);
+    return;
+  }
+
+  // Question phase
+  if(QUIZ_STATE.index < QUIZ_STATE.questions.length){
+    const q = QUIZ_STATE.questions[QUIZ_STATE.index];
+    body.innerHTML = `
+      <div class="quiz-progress">
+        <span>Question ${QUIZ_STATE.index + 1} of ${QUIZ_STATE.questions.length}</span>
+        <span class="q-score">${QUIZ_STATE.score} correct</span>
+      </div>
+      <div class="quiz-bar"><div style="width:${(QUIZ_STATE.index)*10}%;"></div></div>
+      <div class="quiz-question">${q.q}</div>
+      <div class="quiz-options" id="quiz-options">
+        ${q.opts.map((o,i)=>`
+          <button class="quiz-opt" data-i="${i}" onclick="answerQuiz(${i})">
+            <span class="opt-letter">${String.fromCharCode(65+i)}</span>
+            <span>${o}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="quiz-feedback" id="quiz-feedback"></div>
+    `;
+    foot.innerHTML = `<button class="btn btn-secondary" onclick="closeQuiz()">Save & Close</button>`;
+    return;
+  }
+
+  // Results
+  const passed = QUIZ_STATE.score >= 8;
+  body.innerHTML = `
+    <div class="quiz-result ${passed?'pass':'fail'}">
+      <div class="big-score">${QUIZ_STATE.score}/10</div>
+      <div class="score-sub">${passed?'Passed':'Not yet'}</div>
+      <h4>${passed ? 'Nice work, ' + escapeHTML(QUIZ_STATE.name) + '.' : 'Close, ' + escapeHTML(QUIZ_STATE.name) + '.'}</h4>
+      <p>${passed
+        ? "You hit the 8-of-10 threshold. Your completion certificate is ready."
+        : "You need 8 of 10 to pass. Review the Laws and the section above, then take it again. The questions get shuffled."}</p>
+    </div>
+  `;
+  foot.innerHTML = passed
+    ? `<button class="btn btn-secondary" onclick="closeQuiz()">Close</button>
+       <button class="btn btn-success" onclick="completeQuiz()">🏆 Generate Certificate</button>`
+    : `<button class="btn btn-secondary" onclick="closeQuiz()">Close</button>
+       <button class="btn btn-primary" onclick="startQuiz('${QUIZ_STATE.aud}')">Try Again →</button>`;
+}
+
+function submitName(){
+  const v = document.getElementById('quiz-name-input').value.trim();
+  if(!v){ document.getElementById('quiz-name-input').focus(); return; }
+  QUIZ_STATE.name = v;
+  QUIZ_STATE.awaitingName = false;
+  localStorage.setItem('crestTeamUser', JSON.stringify({ name:v }));
+  renderQuiz();
+}
+
+function answerQuiz(i){
+  if(QUIZ_STATE.answered) return;
+  QUIZ_STATE.answered = true;
+
+  const q = QUIZ_STATE.questions[QUIZ_STATE.index];
+  const correct = i === q.correct;
+  if(correct) QUIZ_STATE.score++;
+
+  document.querySelectorAll('.quiz-opt').forEach(b=>b.classList.add('locked'));
+  document.querySelector(`.quiz-opt[data-i="${q.correct}"]`).classList.add('correct');
+  if(!correct) document.querySelector(`.quiz-opt[data-i="${i}"]`).classList.add('wrong');
+
+  const fb = document.getElementById('quiz-feedback');
+  fb.classList.add('show', correct ? 'correct' : 'wrong');
+  fb.innerHTML = correct
+    ? `<strong>✓ Correct.</strong>${q.why}`
+    : `<strong>✕ Not quite. Here's why:</strong>${q.why}`;
+
+  document.getElementById('quiz-foot').innerHTML = `
+    <button class="btn btn-secondary" onclick="closeQuiz()">Save & Close</button>
+    <button class="btn btn-primary" onclick="nextQuiz()">${QUIZ_STATE.index+1 === QUIZ_STATE.questions.length ? 'See Result →' : 'Next →'}</button>
+  `;
+}
+
+function nextQuiz(){
+  QUIZ_STATE.index++;
+  QUIZ_STATE.answered = false;
+  renderQuiz();
+}
+
+function completeQuiz(){
+  const aud = QUIZ_STATE.aud;
+  const data = {
+    name: QUIZ_STATE.name,
+    score: QUIZ_STATE.score,
+    date: new Date().toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'}),
+    passed: true,
+  };
+  saveQuizResult(aud, data);
+  closeQuiz();
+  viewCert(aud);
+  // Re-render to update the launcher state
+  selectSection(aud, 'quiz');
+}
+
+function closeQuiz(){
+  document.getElementById('quiz-modal').classList.remove('active');
+  // refresh quiz section if it's visible to reflect saved state
+  const audEl = document.getElementById('audience');
+  if(audEl.classList.contains('active')) {
+    const aud = audEl.getAttribute('data-aud');
+    renderAudience(aud);
+    const active = document.querySelector('#section-nav .sec-pill.active');
+    if(active) selectSection(aud, active.dataset.sec);
+  }
+}
+
+function quizStatus(aud){
+  const all = JSON.parse(localStorage.getItem('crestTeamQuizzes') || '{}');
+  const r = all[aud];
+  if(!r) return { attempted:false, passed:false };
+  return { attempted:true, passed:r.passed, name:r.name, date:r.date, score:r.score };
+}
+
+function saveQuizResult(aud, data){
+  const all = JSON.parse(localStorage.getItem('crestTeamQuizzes') || '{}');
+  all[aud] = data;
+  localStorage.setItem('crestTeamQuizzes', JSON.stringify(all));
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CERTIFICATE
+═══════════════════════════════════════════════════════════════════ */
+function viewCert(aud){
+  const status = quizStatus(aud);
+  if(!status.passed) return;
+
+  const html = certHTML(aud, status);
+  document.getElementById('cert-body').innerHTML = html;
+  document.getElementById('cert-modal').classList.add('active');
+  document.getElementById('print-cert').innerHTML = html;
+}
+
+function certHTML(aud, status){
+  const audLabel = CONTENT[aud].label;
+  return `
+    <div class="cert">
+      <div class="cert-inner">
+        <div class="c-logos">
+          <img src="logo-csa.png" alt="CSA">
+          <img src="${CLUB_CONFIG.logo}" alt="${escapeHTML(CLUB_CONFIG.short)}">
+          <img src="logo-csrp.png" alt="CSRP">
+        </div>
+        <div class="c-eyebrow">CREST Team · ${escapeHTML(CLUB_CONFIG.short)}</div>
+        <div class="c-title">Certificate of Completion</div>
+        <div class="c-presented">This certifies that</div>
+        <div class="c-name">${escapeHTML(status.name)}</div>
+        <div class="c-statement">
+          has completed the <strong>${audLabel}</strong> module of the<br>
+          C.R.E.S.T. Team education program<br>
+          with a score of <strong>${status.score}/10</strong>.
+        </div>
+        <div class="c-meta">
+          <div class="c-line">Issued<strong>${status.date}</strong></div>
+          <div class="c-line">Authority<strong>Colorado Soccer Association</strong></div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function closeCert(){
+  document.getElementById('cert-modal').classList.remove('active');
+}
+
+function printCert(){
+  window.print();
+}
+
+/* ════════════════════════════════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════════════════════════════════ */
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]] = [arr[j],arr[i]];
+  }
+  return arr;
+}
+
+function escapeHTML(s){
+  return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// Initial state
+goSplash();
+
+// Close modals on backdrop click
+document.querySelectorAll('.modal').forEach(m=>{
+  m.addEventListener('click', e => { if(e.target===m) m.classList.remove('active'); });
+});
+
+// Allow Enter to submit name
+document.addEventListener('keypress', e => {
+  if(e.key === 'Enter' && QUIZ_STATE && QUIZ_STATE.awaitingName){
+    submitName();
+  }
+});
+</script>
+</body>
+</html>

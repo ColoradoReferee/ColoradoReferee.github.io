@@ -1,5 +1,5 @@
 <!doctype html>
-<!-- index.html v2026.11.07 · Colorado Soccer Referee Program front door. Points at the Hub, the Library, the field maps and the Academy. Shares hub-lang and hub-theme with the Hub. 2026.11.07: link-preview tags added so shared links show the CSA logo instead of whatever image the scraper picked from the page. -->
+<!-- index.html v2026.11.16 · Colorado Soccer Referee Program front door. Points at the Hub, the Library, the field maps and the Academy. Shares hub-lang and hub-theme with the Hub. 2026.11.16: the pathway rework. A Register for 2027 card up top while registration is open, and The pathway strip telling the road from first whistle to the national pathway. 2026.11.07: link-preview tags added so shared links show the CSA logo. -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -52,6 +52,17 @@ a.card.main { border: 2px solid var(--gold); }
 .h2 { font-family: var(--disp); font-style: italic; font-weight: 800; font-size: 26px; margin: 34px 0 6px; }
 .teams { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .teams a { font-size: 14px; font-weight: 700; text-decoration: none; color: var(--ink); padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+.card.reg { border: 2px solid var(--red); }
+.card.reg .go { color: var(--red); font-weight: 700; }
+:root[data-theme="dark"] .card.reg .go { color: var(--gold); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .card.reg .go { color: var(--gold); } }
+.path { list-style: none; counter-reset: pstep; margin: 14px 0 0; padding: 0; }
+.path li { counter-increment: pstep; display: grid; grid-template-columns: 44px 1fr; gap: 2px 14px; padding: 14px 0; border-top: 1px solid var(--line); }
+.path li::before { content: counter(pstep); grid-row: 1 / 3; font-family: var(--disp); font-style: italic; font-weight: 800; font-size: 32px; color: var(--red); line-height: 1; }
+:root[data-theme="dark"] .path li::before { color: var(--gold); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .path li::before { color: var(--gold); } }
+.path b { font-family: var(--disp); font-style: italic; font-weight: 800; font-size: 20px; letter-spacing: .01em; }
+.path span { color: var(--muted); font-size: 15px; }
 .foot { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 6px 14px; align-items: center; }
 .foot a { color: var(--muted); }
 :root[data-theme="dark"] .card .go { color: var(--gold); }
@@ -69,9 +80,14 @@ a.card.main { border: 2px solid var(--gold); }
   </div>
 
   <h1 data-t="h1">COLORADO REFEREES</h1>
-  <p class="lead" data-t="lead">Everything a Colorado referee needs, in one place. Run by the Colorado Soccer Association's Referee Department.</p>
+  <p class="lead" data-t="lead">Everything a Colorado referee needs, from your first whistle to the national pathway. Run by the Colorado Soccer Association's Referee Department.</p>
 
   <div class="cards">
+    <a class="card reg" href="https://learning.ussoccer.com/" target="_blank" rel="noopener">
+      <b data-t="regT">Register for 2027</b>
+      <p data-t="regP">Your 2026 license ends December 31. Renew in the US Soccer Learning Center now and keep your place on the assigning lists.</p>
+      <span class="go" data-t="regGo">Open the Learning Center &rsaquo;</span>
+    </a>
     <a class="card main" href="hub/">
       <b data-t="hubT">The Hub</b>
       <p data-t="hubP">Your games, check-in at the venue, help one tap away, your feedback and your card, fitness tests and evaluations. Sign in with your email and add it to your home screen.</p>
@@ -99,6 +115,15 @@ a.card.main { border: 2px solid var(--gold); }
     </a>
   </div>
 
+  <div class="h2" data-t="pathT">The pathway</div>
+  <p class="lead" style="font-size:15px" data-t="pathP">Refereeing in Colorado is a road, and every stop on it lives here.</p>
+  <ol class="path">
+    <li><b data-t="p1T">First whistle</b><span data-t="p1P">Take the course, in school through the CREST Academy or through the Colorado new referee class, and work your first games with a mentor nearby.</span></li>
+    <li><b data-t="p2T">Real games, real feedback</b><span data-t="p2P">Check in from your phone, and coaching notes reach you the same evening they are written. Every game builds your record.</span></li>
+    <li><b data-t="p3T">Grow on purpose</b><span data-t="p3P">Fitness tests, the Library, development groups and formal evaluations when you are ready to move up.</span></li>
+    <li><b data-t="p4T">Regional and beyond</b><span data-t="p4P">Your whole record, games, evaluations and fitness, backs you when the national pathway comes asking. Colorado referees have made it all the way. You can too.</span></li>
+  </ol>
+
   <div class="h2" data-t="teamsT">Team pages</div>
   <p class="lead" style="font-size:15px" data-t="teamsP">Pages for the clubs CREST works with.</p>
   <div class="teams">
@@ -114,14 +139,27 @@ a.card.main { border: 2px solid var(--gold); }
     <span>Colorado Soccer Association</span>
     <a href="https://www.coloradosoccer.org">ColoradoSoccer.org</a>
     <a href="https://jareferee.com">Built with JAReferee</a>
-    <span>v2026.10.21</span>
+    <span>v2026.11.16</span>
   </div>
 </div>
 <script>
 (function () {
   var ES = {
     h1: 'ÁRBITROS DE COLORADO',
-    lead: 'Todo lo que necesita un árbitro de Colorado, en un solo lugar. Del Departamento de Árbitros de la Colorado Soccer Association.',
+    lead: 'Todo lo que necesita un árbitro de Colorado, desde tu primer silbatazo hasta la trayectoria nacional. Del Departamento de Árbitros de la Colorado Soccer Association.',
+    regT: 'Regístrate para 2027',
+    regP: 'Tu licencia 2026 termina el 31 de diciembre. Renueva ahora en el Learning Center de US Soccer y conserva tu lugar en las listas de asignación.',
+    regGo: 'Abrir el Learning Center ›',
+    pathT: 'La trayectoria',
+    pathP: 'El arbitraje en Colorado es un camino, y cada parada vive aquí.',
+    p1T: 'El primer silbatazo',
+    p1P: 'Toma el curso, en la escuela con la Academia CREST o en la clase de nuevos árbitros de Colorado, y trabaja tus primeros partidos con un mentor cerca.',
+    p2T: 'Partidos reales, retroalimentación real',
+    p2P: 'Regístrate desde tu teléfono, y las notas de los coaches te llegan la misma tarde en que se escriben. Cada partido construye tu expediente.',
+    p3T: 'Crece con propósito',
+    p3P: 'Pruebas físicas, la Biblioteca, grupos de desarrollo y evaluaciones formales cuando estés listo para subir.',
+    p4T: 'Regional y más allá',
+    p4P: 'Todo tu expediente, partidos, evaluaciones y pruebas físicas, te respalda cuando la trayectoria nacional pregunta. Árbitros de Colorado han llegado hasta arriba. Tú también puedes.',
     hubT: 'El Hub',
     hubP: 'Tus partidos, registro en la sede, ayuda a un toque, tu retroalimentación y tu tarjeta, pruebas físicas y evaluaciones. Inicia sesión con tu correo y agrégalo a tu pantalla de inicio.',
     hubGo: 'Abrir el Hub ›',
